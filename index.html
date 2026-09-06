@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blue Jay Application Security — Manual AppSec for SaaS & AI products</title>
-<meta name="description" content="Manual application-security reviews for rapidly built SaaS and AI products. Auth, APIs, authorization/IDOR, tenant isolation, and AI-agent boundaries — with developer-ready fixes.">
+<title>Blue Jay Application Security · Manual AppSec for SaaS & AI products</title>
+<meta name="description" content="Manual application-security reviews for rapidly built SaaS and AI products. Auth, APIs, authorization/IDOR, tenant isolation, and AI-agent boundaries, with developer-ready fixes.">
 <style>
   :root{
     --navy:#17324D; --navy-2:#1f4266; --gold:#B78128; --green:#2F6B4F;
@@ -122,14 +122,14 @@
   <div class="wrap">
     <p class="eyebrow">Manual application security · SaaS &amp; AI products</p>
     <h1>I break AI-built SaaS applications before your users do.</h1>
-    <p class="sub">Manual, developer-ready security testing for products that were built fast —
-       focused on authentication, APIs, authorization/IDOR, tenant isolation, and AI-agent boundaries.
-       I reproduce the issue, explain the root cause, and can help implement the fix.</p>
+    <p class="sub">Your product was built fast, and it works. What nobody has checked is whether one customer can
+       quietly reach another's data, or whether your AI agent can be talked into an action the user was
+       never allowed to take. I test that by hand, then show you how to reproduce it and how to fix it.</p>
     <div class="actions">
       <a class="btn" href="#contact">Book a pre-launch review</a>
       <a class="btn ghost" href="#sample">See a sample report</a>
     </div>
-    <p class="note">Every engagement runs on explicit written scope and authorization. No scanners-only reports.</p>
+    <p class="note">Every engagement runs on written scope and authorization. No scanner-dump reports with my name on them.</p>
   </div>
 </section>
 
@@ -138,15 +138,15 @@
   <div class="wrap">
     <p class="eyebrow">The problem I solve</p>
     <h2 class="section-title">The product works. Nobody has tested the trust boundaries.</h2>
-    <p class="lead">Fast, AI-assisted development ships features quickly and quietly skips the checks
-       that decide whether one customer can reach another customer's data. That's the work I do — by hand.</p>
+    <p class="lead">Fast, AI-assisted development ships features quickly and skips the checks that decide whether one
+       customer can reach another's data. That's the work I do, by hand.</p>
     <div class="grid cols-3" style="margin-top:26px">
-      <div class="card"><h3>Authorization &amp; IDOR/BOLA</h3><p>Can user A reach user B's data? Can tenant A reach tenant B? Can a normal user reach admin functions? Tested role-by-role and object-by-object.</p></div>
-      <div class="card"><h3>Tenant isolation</h3><p>Multi-tenant products live or die on isolation. I verify that every object read and write is scoped to the caller's tenant — not just authenticated.</p></div>
-      <div class="card"><h3>APIs &amp; business logic</h3><p>Hidden endpoints, state-transition abuse, mass assignment, and server-side trust of client-controlled role/price/owner values.</p></div>
-      <div class="card"><h3>AI agent &amp; tool boundaries</h3><p>Prompt injection, and whether model output can trigger privileged tool actions without server-side authorization. RAG/retrieval isolation.</p></div>
-      <div class="card"><h3>Authentication &amp; sessions</h3><p>Login/logout, password reset and recovery, token handling, and privilege changes — the workflows attackers reach first.</p></div>
-      <div class="card"><h3>Developer-ready remediation</h3><p>I come from a development background, so findings are written for engineers — with a specific fix, not just a severity label.</p></div>
+      <div class="card"><h3>Authorization &amp; IDOR/BOLA</h3><p>Can user A reach user B's data? Can a normal user hit an admin-only function? I test it the tedious way, one role and one object at a time.</p></div>
+      <div class="card"><h3>Tenant isolation</h3><p>Multi-tenant products live or die on isolation. Being logged in isn't the same as being allowed, so I check that every read and write is scoped to the right tenant.</p></div>
+      <div class="card"><h3>APIs &amp; business logic</h3><p>The endpoints you never documented, workflows run out of order, and fields like role or price that the server quietly trusts from the client.</p></div>
+      <div class="card"><h3>AI agent &amp; tool boundaries</h3><p>Prompt injection, and whether the model's output can make a tool do something privileged with no real authorization check. Plus what your retrieval layer hands back to the wrong user.</p></div>
+      <div class="card"><h3>Authentication &amp; sessions</h3><p>Login, logout, password reset, token handling, and the moment a user's privileges change. These are the workflows an attacker reaches first.</p></div>
+      <div class="card"><h3>Developer-ready remediation</h3><p>I come from a development background, so each finding is written for the engineer who has to fix it. You get the change to make, not a severity label and good luck.</p></div>
     </div>
   </div>
 </section>
@@ -157,10 +157,10 @@
     <p class="eyebrow">Who this is for</p>
     <h2 class="section-title">Too real to ignore security. Too small for a full-time AppSec hire.</h2>
     <div class="grid cols-2" style="margin-top:22px">
-      <div class="card"><h3>Founders &amp; small SaaS teams</h3><p>Launching or scaling a product with real users, multiple roles, or multiple tenants — and no independent security review yet.</p></div>
-      <div class="card"><h3>AI product teams</h3><p>Agents that call tools or actions, RAG apps handling private data, and AI-assisted codebases nobody has adversarially tested.</p></div>
-      <div class="card"><h3>Healthcare &amp; sensitive-data SaaS</h3><p>Products where an access-control failure exposes personal or clinical data — where the boundaries have to be right.</p></div>
-      <div class="card"><h3>Agencies &amp; MSPs</h3><p>Add an independent, white-label pre-launch security review to client projects without hiring an AppSec engineer.</p></div>
+      <div class="card"><h3>Founders &amp; small SaaS teams</h3><p>You're launching or scaling a product with real users and roles, and nobody outside the team has looked at it for security yet.</p></div>
+      <div class="card"><h3>AI product teams</h3><p>You've shipped an agent that can call tools, or a RAG app sitting on private data, and nobody has tried to make it misbehave on purpose.</p></div>
+      <div class="card"><h3>Healthcare &amp; sensitive-data SaaS</h3><p>Products where one access-control slip exposes personal or clinical data. The boundaries have to be right the first time.</p></div>
+      <div class="card"><h3>Agencies &amp; MSPs</h3><p>Add a white-label pre-launch security review to your client work without keeping a security engineer on the payroll.</p></div>
     </div>
   </div>
 </section>
@@ -170,12 +170,12 @@
   <div class="wrap">
     <p class="eyebrow">Packages</p>
     <h2 class="section-title">Fixed-scope, fixed-price. One retest included.</h2>
-    <p class="lead">Introductory pricing. Scope is agreed in writing before anything starts, so you know exactly what you're buying.</p>
+    <p class="lead">Introductory pricing. We agree the scope in writing before I start, so you know exactly what you're paying for.</p>
     <div class="grid cols-3" style="margin-top:26px">
       <div class="card pkg">
         <h3>Launch Check</h3>
         <div class="price"><span class="amt">$750</span><span class="per">/ engagement</span></div>
-        <p>For a small MVP or simple role model.</p>
+        <p>For a small MVP or a simple set of roles.</p>
         <ul>
           <li>Focused auth / API / access review</li>
           <li>Concise, prioritized report</li>
@@ -197,7 +197,7 @@
       <div class="card pkg">
         <h3>Break + Fix</h3>
         <div class="price"><span class="amt">$2,500–$3,500</span></div>
-        <p>For teams that want resolution, not just findings.</p>
+        <p>For teams that want the holes closed, not only listed.</p>
         <ul>
           <li>Full security review</li>
           <li>Agreed remediation work</li>
@@ -205,9 +205,9 @@
         </ul>
       </div>
     </div>
-    <p class="lead" style="margin-top:18px"><strong>Founding-client offer:</strong> the first three clients can take the
-       $1,500 review at about $1,000, in exchange for tightly scoped work and — only if you're comfortable —
-       permission to reference an anonymized case study.</p>
+    <p class="lead" style="margin-top:18px"><strong>Founding-client offer:</strong> my first three clients get the
+       $1,500 review for around $1,000. In exchange I ask for tightly scoped work and, only if you're
+       comfortable with it, permission to write it up as an anonymized case study.</p>
   </div>
 </section>
 
@@ -218,15 +218,15 @@
     <h2 class="section-title">From "yes" to a report you can hand an engineer.</h2>
     <div class="grid cols-2" style="margin-top:20px;align-items:start">
       <div class="steps">
-        <div class="step"><span class="num"></span><div><strong>Scope &amp; authorization.</strong> We agree exact apps, roles, environment, and rules in writing. Nothing is tested without it.</div></div>
-        <div class="step"><span class="num"></span><div><strong>Manual testing.</strong> Role-by-role, workflow-by-workflow. Automated discovery only supports the manual work.</div></div>
-        <div class="step"><span class="num"></span><div><strong>Report.</strong> Prioritized findings with reproduction, impact, root cause, and a specific fix.</div></div>
-        <div class="step"><span class="num"></span><div><strong>Retest.</strong> After you fix, I repeat the original proof and confirm it's closed.</div></div>
+        <div class="step"><span class="num"></span><div><strong>Scope and authorization.</strong> We write down the exact apps, roles, and rules before anything happens. I don't touch a system that isn't on that page.</div></div>
+        <div class="step"><span class="num"></span><div><strong>Manual testing.</strong> I work through it role by role and workflow by workflow. Tools help me map the surface; the testing itself is by hand.</div></div>
+        <div class="step"><span class="num"></span><div><strong>Report.</strong> Findings ranked by what actually matters, each with how to reproduce it, why it happens, and the fix.</div></div>
+        <div class="step"><span class="num"></span><div><strong>Retest.</strong> Once you've fixed it, I run the original attack again and confirm it's really closed.</div></div>
       </div>
       <div class="proofwrap">
         <h3 style="color:var(--navy);margin-top:0">Want to see the deliverable first?</h3>
-        <p class="lead">I'll send a sanitized sample report against a fictional app so you can judge the depth and tone
-           before you commit — plus a one-page outline of exactly what I'd test in your product.</p>
+        <p class="lead">I'll send a sanitized sample report against a made-up app so you can judge the depth before you
+           commit. I'll also outline exactly what I'd test in your product.</p>
         <a class="btn dark" href="#contact" style="margin-top:.6rem">Request the sample report</a>
       </div>
     </div>
@@ -263,8 +263,8 @@
           </div>
         </div>
       </div>
-      <p class="lead" style="margin-top:16px">The combination is the point: I don't just flag a broken assumption — I understand
-         software well enough to help you correct it.</p>
+      <p class="lead" style="margin-top:16px">That combination is the point. Plenty of people can flag a broken assumption; I can also sit down
+         and help you fix the code.</p>
       <a class="btn dark" href="case-studies.html" style="margin-top:16px">See worked case studies →</a>
     </div>
   </div>
@@ -277,21 +277,21 @@
     <h2 class="section-title">Questions I usually get</h2>
     <div style="margin-top:20px;max-width:760px">
       <details><summary>We already use a scanner. Why do we need this?</summary>
-        <p>Scanners are useful, but they can't understand your business workflows or your authorization model.
-           A scanner won't tell you that tenant A can read tenant B's records, or that your AI assistant can cancel
-           a booking it shouldn't. That manual trust-boundary testing is exactly what I do.</p></details>
-      <details><summary>We're a small team — aren't we too small for this?</summary>
-        <p>Small teams are where a pre-launch review is most economical. It's far cheaper to fix an authorization
-           bug before launch than to explain a data exposure to your customers after.</p></details>
+        <p>Scanners are useful, but they don't understand your workflows or your authorization model. A scanner
+           won't tell you that tenant A can read tenant B's records, or that your AI assistant can cancel a
+           booking it shouldn't. That's the part I test.</p></details>
+      <details><summary>We're a small team. Aren't we too small for this?</summary>
+        <p>Small teams are where this pays off most. Fixing an authorization bug before launch is far cheaper
+           than explaining a data breach to your customers after.</p></details>
       <details><summary>Can you guarantee we have no vulnerabilities?</summary>
-        <p>No — and anyone who promises that is misleading you. A time-boxed manual review gives scoped assurance
-           over the areas we agree to test. I state the limitations plainly in every report.</p></details>
+        <p>No, and anyone who promises that is lying to you. A time-boxed review covers the areas we agreed to
+           test, and the report is clear about what I didn't get to.</p></details>
       <details><summary>What do I get at the end?</summary>
-        <p>A report an engineer can act on: prioritized findings, each with reproduction steps, impact, root cause,
-           and a specific remediation — plus one retest after you fix.</p></details>
+        <p>A report an engineer can act on. Each finding has reproduction steps, the impact, the root cause, and
+           the fix. After you've patched things, I retest once.</p></details>
       <details><summary>Is this legal / authorized?</summary>
-        <p>Only ever with written scope and authorization confirming you have the authority to permit testing of the
-           listed systems. I don't test anything outside that.</p></details>
+        <p>Only with written scope and authorization confirming you're allowed to permit testing of the systems
+           listed. I don't go outside it.</p></details>
     </div>
   </div>
 </section>
@@ -301,8 +301,8 @@
   <div class="wrap">
     <div class="band">
       <h2>Ship it knowing someone tried to break it first.</h2>
-      <p>Tell me what you're launching and what one user should never be able to see from another.
-         I'll reply with what I'd test and a sample report.</p>
+      <p>Tell me what you're launching and what one user should never be able to see from another. I'll reply
+         with what I'd test, and a sample report.</p>
       <div class="actions" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
         <a class="btn" href="mailto:jbluestine@bluejayappsec.com?subject=Pre-launch%20security%20review">jbluestine@bluejayappsec.com</a>
         <a class="btn ghost" href="mailto:jbluestine@bluejayappsec.com?subject=15-minute%20scope%20call">Book a 15-min call</a>
@@ -313,7 +313,7 @@
 
 <footer>
   <div class="wrap">
-    Blue Jay Application Security — manual application-security testing for SaaS &amp; AI products.<br>
+    Blue Jay Application Security. Manual application-security testing for SaaS and AI products.<br>
     Engagements run on explicit written scope and authorization. © <span id="yr"></span> Blue Jay Software.
   </div>
 </footer>
