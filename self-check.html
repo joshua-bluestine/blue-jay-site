@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="theme-color" content="#0b2c58">
+<title>AI App Security Self-Check &middot; Blue Jay Application Security</title>
+<meta name="description" content="Ten trust-boundary checks AI and SaaS products get wrong most often, written so a developer can run them in about ten minutes with two test accounts and their own logs. No security background required.">
+<style>
+  :root{
+    --navy:#0b2c58; --navy-2:#06203f; --blue:#0064d0; --blue-2:#0052ab; --blue-soft:#e7f0fb;
+    --ink:#17212B; --muted:#5a6b7a; --line:#e2e8ef; --bg:#f6f8fa; --card:#ffffff;
+    --maxw:1060px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--navy)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  h1,h2,h3{line-height:1.2;margin:0 0 .4em}
+  .eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:0 0 .8em}
+
+  /* header (shared with index) */
+  header{position:sticky;top:0;z-index:20;background:rgba(11,44,88,.97);backdrop-filter:saturate(140%) blur(6px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{display:flex;align-items:center;gap:.55rem;color:#fff;font-weight:800;letter-spacing:.02em;text-decoration:none}
+  .brand .brand-logo{width:36px;height:36px;border-radius:9px;background:#fff;object-fit:contain;padding:2px;display:block}
+  .nav a.link{color:#cdd8e4;text-decoration:none;margin-left:1.4rem;font-size:.92rem}
+  .nav a.link:hover{color:#fff}
+  .nav a.link.active{color:#fff;font-weight:700}
+  .nav .cta{margin-left:1.4rem}
+  .btn{display:inline-block;background:var(--blue);color:#fff;font-weight:700;text-decoration:none;
+       padding:.7rem 1.15rem;border-radius:8px;font-size:.95rem;border:1px solid transparent;transition:transform .05s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:#fff;border-color:#3c5a79}
+  .btn.dark{background:var(--navy);color:#fff}
+  @media(max-width:640px){.nav a.link{display:none}}
+
+  /* page hero */
+  .hero{background:linear-gradient(150deg,#103a72,#07213f);color:#fff;padding:56px 0 48px}
+  .hero h1{font-size:2.15rem;font-weight:800;max-width:22ch}
+  .hero .sub{font-size:1.1rem;color:#c8d5e2;max-width:70ch;margin:.2em 0 1.4em}
+  .hero .actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+  @media(max-width:640px){.hero h1{font-size:1.7rem}}
+
+  section{padding:44px 0}
+  .section-title{font-size:1.6rem;font-weight:800;color:var(--navy)}
+  .lead{color:var(--muted);max-width:74ch}
+
+  /* honest-framing note */
+  .note-box{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);
+       border-radius:10px;padding:16px 18px;margin:22px 0 0;color:#33414e;font-size:.94rem;max-width:82ch}
+  .note-box strong{color:var(--navy)}
+
+  /* article cards */
+  .article{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:18px}
+  .article .num{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  .article h2{color:var(--navy);font-size:1.18rem;margin:.35rem 0 0}
+  .kv{margin:.95rem 0 0}
+  .kv .label{font-weight:800;color:var(--navy);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+  .kv p{margin:.28rem 0 0;color:#33414e;font-size:.97rem;max-width:82ch}
+  .kv p code, p code, li code{background:#eef2f6;border:1px solid var(--line);border-radius:5px;padding:.05em .4em;font-size:.86em}
+
+  /* cta band (shared) */
+  .band{background:var(--navy);color:#fff;border-radius:16px;padding:34px;text-align:center}
+  .band h2{color:#fff;font-size:1.5rem}
+  .band p{color:#c8d5e2;max-width:64ch;margin:.3em auto 1.3em}
+  .actions{display:flex;gap:.8rem;flex-wrap:wrap}
+
+  footer{padding:34px 0;color:var(--muted);font-size:.86rem;border-top:1px solid var(--line);margin-top:30px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html#top"><img class="brand-logo" src="logo.png" alt="Blue Jay Application Security logo"> Blue Jay Application Security</a>
+    <nav>
+      <a class="link" href="index.html#services">What I do</a>
+      <a class="link" href="index.html#packages">Packages</a>
+      <a class="link" href="case-studies.html">Case studies</a>
+      <a class="link" href="llm-exploits.html">LLM exploits</a>
+      <a class="link active" href="self-check.html">Self-check</a>
+      <a class="link" href="index.html#faq">FAQ</a>
+      <a class="cta btn" href="index.html#contact">Book a review</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Ship-ready checks &middot; run them yourself in about ten minutes</p>
+    <h1>The 10-minute AI app security self-check</h1>
+    <p class="sub">Ten trust-boundary checks the products I test get wrong most often. None of them need a security
+       background. Each is something you can run yourself with two test accounts and access to your own logs,
+       before you ever pay anyone.</p>
+    <div class="actions">
+      <a class="btn" href="index.html#contact">Book a pre-launch review</a>
+      <a class="btn ghost" href="llm-exploits.html">See LLM exploits</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How to use this</p>
+    <h2 class="section-title">Run them yourself. Both outcomes are useful.</h2>
+    <div class="note-box">
+      <strong>None of this is a claim about any particular app.</strong> It is the set of boundaries AI and SaaS
+      products most often miss. Each check is a few minutes with two test accounts and your own logs. If a check
+      turns up something you can&rsquo;t explain, it is worth a closer look; if it comes back clean, that is one more
+      risk you have ruled out.
+    </div>
+
+    <div style="margin-top:26px">
+
+      <div class="article">
+        <p class="num">Check 01</p>
+        <h2>Can one account load another account&rsquo;s records?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Create a record (a note, upload, or conversation) in test account A, grab its ID or URL, then from account B try to open it by that ID.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Ownership has to be enforced on the server, not hidden in the UI. Access that leaks by changing an identifier is the single most common data-exposure bug.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 02</p>
+        <h2>Does user content end up in your logs or analytics?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Put a unique nonsense string in a test input, use the feature (including the AI call and any backup), then search your logs, crash reports, and analytics for that string.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Sensitive text often gets copied somewhere you did not intend. If it turns up in plaintext where it should not, that is worth a look; if it does not, that risk is cleared.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 03</p>
+        <h2>What are you actually sending to the model?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Capture one real request to your AI provider and read the payload. Is it only the current user&rsquo;s relevant content, or more?</p></div>
+        <div class="kv"><span class="label">Why</span><p>Over-sending other users&rsquo; data, full histories, or secrets to the model is invisible until you look at the wire, and it is a privacy and cost problem at once.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 04</p>
+        <h2>Can memory or context cross between users?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Store a unique fictional detail in account A&rsquo;s history or memory, then talk to the assistant as account B and see whether it surfaces.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Shared caches and memory stores are an easy place for one user&rsquo;s data to leak into another user&rsquo;s answers.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 05</p>
+        <h2>Does revoking access actually revoke it?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Share something or connect an integration, then remove or disconnect it and retry the old request or link from the still-open session.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Access should stop on the server the moment you revoke it, not just disappear from the screen.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 06</p>
+        <h2>Do share links leak when you change the ID?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Open a share link in a private browser window with no login, then alter the identifier in the URL and see whether other items become reachable.</p></div>
+        <div class="kv"><span class="label">Why</span><p>A share link should expose only the one thing shared. Guessable or unscoped identifiers expose everything.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 07</p>
+        <h2>Are file and image URLs protected on their own?</h2>
+        <div class="kv"><span class="label">Run it</span><p>For any uploaded file or generated image, grab its direct URL and try it logged out and from another account.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Apps often protect the page but leave the underlying file world-readable to anyone who has, or can guess, the link.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 08</p>
+        <h2>What leaks through backups, exports, and temp files?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Run an export or backup, then check where the file lands and whether other apps on the device, or the wrong cloud account, can read it.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Data that is safe inside the app often leaks through the side doors around it.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 09</p>
+        <h2>Are third-party scopes minimal and reversible?</h2>
+        <div class="kv"><span class="label">Run it</span><p>When connecting Google, Drive, or a calendar, note the permissions requested, then disconnect and confirm the old token can no longer read or write.</p></div>
+        <div class="kv"><span class="label">Why</span><p>Over-broad scopes and tokens that outlive a disconnection are common, and costly when the connected account holds real data.</p></div>
+      </div>
+
+      <div class="article">
+        <p class="num">Check 10</p>
+        <h2>Does the server trust the client for identity or entitlements?</h2>
+        <div class="kv"><span class="label">Run it</span><p>Replay a request with a changed user ID, owner ID, or an <code>isPro</code> / <code>isAdmin</code>-type field and see whether the server accepts it.</p></div>
+        <div class="kv"><span class="label">Why</span><p>The client can send anything. Identity, ownership, and paid-tier checks all have to happen on the server.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="band">
+      <h2>Want the full version run against your app?</h2>
+      <p>I am taking on a few founding clients at no cost, in exchange for a short testimonial and permission to
+         reference the work. I test these boundaries by hand, then show you how to reproduce and fix anything I find.</p>
+      <div class="actions" style="justify-content:center">
+        <a class="btn" href="mailto:jbluestine@bluejayappsec.com?subject=Founding-client%20security%20review">jbluestine@bluejayappsec.com</a>
+        <a class="btn ghost" href="case-studies.html">See worked case studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Blue Jay Application Security. Manual application-security testing for SaaS and AI products.<br>
+    Engagements run on explicit written scope and authorization. &copy; <span id="yr"></span> Blue Jay Software.
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
