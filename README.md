@@ -1,27 +1,20 @@
-# Blue Jay Application Security — website
+# Blue Jay Application Security
 
-Single-page static site for https://bluejayappsec.com, served free via **GitHub Pages**.
+Static single-page site for https://bluejayappsec.com, published by GitHub Pages from `main` at the repository root.
 
-## Deploy
-1. Create an empty **public** repo named `blue-jay-site` at https://github.com/new
-   (no README/.gitignore/license).
-2. Push:
-   ```bash
-   cd "…/Blue-Jay-Site"
-   git branch -M main
-   git remote add origin https://github.com/joshua-bluestine/blue-jay-site.git
-   git push -u origin main
-   ```
-3. Repo **Settings → Pages** → Source: *Deploy from a branch* → Branch **main** / **/(root)** → Save.
-   Live at `https://joshua-bluestine.github.io/blue-jay-site/` within ~1 min.
+## Structure
 
-## Custom domain (bluejayappsec.com), later
-Settings → Pages → Custom domain → enter `bluejayappsec.com` → Save (this creates a
-`CNAME` file). Then in your domain's DNS add:
-- `A` records for the apex `@` → GitHub Pages IPs: `185.199.108.153`, `185.199.109.153`,
-  `185.199.110.153`, `185.199.111.153`
-- `CNAME` `www` → `joshua-bluestine.github.io`
-Then tick **Enforce HTTPS** once the cert issues.
+- `index.html`: credentials, research, testing approach, plans, and contact.
+- `assets/site.css`: responsive design and motion preferences.
+- `assets/site.js`: mobile navigation, scroll progress, reveals, process steps, and research deep links.
+- Existing research/service URLs redirect to their sections on the homepage; `llm-exploits.html#r1` through `#r5` retain their destinations.
+- Case studies and self-check have been removed. Missing URLs use `404.html`.
+- `sitemap.xml` includes the canonical homepage.
 
-## Update the site
-Edit `index.html`, commit, push — Pages redeploys automatically.
+No build step or external JavaScript dependencies. Preview with `python -m http.server --bind 127.0.0.1`. Publish by committing reviewed changes and pushing to `main`.
+
+## Design references
+
+The October 2026 redesign adapts large typography, quiet sticky navigation, dimensional graphics, and section-based storytelling from [Linear](https://linear.app/), [Vercel](https://vercel.com/), and [Resend](https://resend.com/). Graphics and implementation are original to this site. Scrolling remains native, motion can be paused, and system reduced-motion preferences are respected.
+
+Monthly testing is quoted individually: hours, fee, and launch discount must be agreed before work begins.

@@ -1,9 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://bluejayappsec.com/</loc></url>
-  <url><loc>https://bluejayappsec.com/saas-security-review.html</loc></url>
-  <url><loc>https://bluejayappsec.com/xoscar-control-plane-research.html</loc></url>
-  <url><loc>https://bluejayappsec.com/case-studies.html</loc></url>
-  <url><loc>https://bluejayappsec.com/llm-exploits.html</loc></url>
-  <url><loc>https://bluejayappsec.com/self-check.html</loc></url>
-</urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://bluejayappsec.com/</loc><lastmod>2026-10-16</lastmod></url></urlset>
