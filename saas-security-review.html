@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="theme-color" content="#0b2c58">
+<title>Web Application Security Testing for Small SaaS Teams | Blue Jay</title>
+<meta name="description" content="A focused manual web app and API security review for small SaaS teams. Test logins, access controls, tenant isolation, and business workflows before launch. Clear report, practical fixes, one retest.">
+<link rel="canonical" href="https://bluejayappsec.com/saas-security-review.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blue Jay Application Security">
+<meta property="og:title" content="Web Application Security Testing for Small SaaS Teams">
+<meta property="og:description" content="A focused manual security review of the user and tenant boundaries your SaaS depends on.">
+<meta property="og:url" content="https://bluejayappsec.com/saas-security-review.html">
+<meta property="og:image" content="https://bluejayappsec.com/logo.png">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Web application security review for small SaaS teams",
+  "description": "Manual testing of authentication, APIs, authorization, tenant isolation, and business workflows with a report and one retest.",
+  "provider": {"@type": "ProfessionalService", "name": "Blue Jay Application Security", "url": "https://bluejayappsec.com/"},
+  "areaServed": {"@type": "Country", "name": "United States"}
+}
+</script>
+<style>
+  :root{--navy:#0b2c58;--navy-2:#06203f;--blue:#0064d0;--ink:#17212b;--muted:#4d5b69;--line:#e2e8ef;--bg:#f6f8fa;--maxw:1060px}
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  a{color:var(--navy)} a:focus-visible{outline:3px solid #7fb3ff;outline-offset:2px;border-radius:4px}
+  .wrap{max-width:var(--maxw);margin:auto;padding:0 22px}
+  h1,h2,h3{line-height:1.22} h2{color:var(--navy)}
+  header{background:var(--navy);color:#fff}
+  .nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+  .brand{color:#fff;text-decoration:none;font-weight:800;display:flex;align-items:center;gap:9px}
+  .brand img{width:35px;height:35px;background:#fff;border-radius:8px;object-fit:contain;padding:2px}
+  nav{display:flex;gap:18px;flex-wrap:wrap} nav a{color:#dbe7f4;text-decoration:none;font-size:.93rem} nav a:hover{text-decoration:underline;color:#fff}
+  .hero{background:linear-gradient(150deg,#103a72,#07213f);color:#fff;padding:64px 0}
+  .eyebrow{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:#77b9ff}
+  .hero h1{font-size:clamp(2rem,4vw,2.7rem);max-width:19ch;margin:.35em 0}
+  .hero p{font-size:1.12rem;color:#d3e0ee;max-width:70ch}
+  .btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:.74rem 1.14rem;border-radius:8px;margin-top:14px}
+  .btn:hover{background:#0052ab}
+  section{padding:52px 0}.lead{color:var(--muted);max-width:78ch;font-size:1.06rem}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+  .card h3{color:var(--navy);margin:0 0 8px}.card p{color:var(--muted);margin:0}
+  .note{background:#e7f0fb;border-left:4px solid var(--blue);padding:19px 22px;border-radius:8px;max-width:80ch}
+  .steps{padding-left:1.3rem;max-width:78ch}.steps li{padding:7px 0}
+  .faq{max-width:82ch}.faq h3{color:var(--navy);margin-top:25px;margin-bottom:5px}.faq p{margin:0;color:var(--muted)}
+  .band{background:var(--navy);color:#fff;border-radius:16px;padding:34px}.band h2{color:#fff;margin-top:0}.band p{color:#d3e0ee;max-width:70ch}
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.88rem}
+  @media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding:45px 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="index.html"><img src="logo.png" alt="">Blue Jay Application Security</a>
+  <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#packages">Packages</a><a href="case-studies.html">Case studies</a><a href="xoscar-control-plane-research.html">Research</a><a href="index.html#contact">Contact</a></nav>
+</div></header>
+
+<main>
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">For startups and small SaaS businesses across the US</div>
+  <h1>Web application security testing for small SaaS teams.</h1>
+  <p>When your app has customer accounts, roles, APIs, or private data, a focused manual review helps you check the boundaries that matter before a launch or major release. I test the agreed workflows, show you what I found, and help your engineers fix it.</p>
+  <a class="btn" href="index.html#contact">Ask about a security review</a>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What the review covers</h2>
+  <p class="lead">The exact scope depends on your product. We choose the most important customer journeys and permission boundaries together, then write them down before testing starts.</p>
+  <div class="grid">
+    <div class="card"><h3>Accounts and sessions</h3><p>Login, password reset, session handling, privilege changes, and paths where a user may become another user or an administrator.</p></div>
+    <div class="card"><h3>Customer and tenant isolation</h3><p>Whether one account or organization can read or change another's records, files, exports, or API objects.</p></div>
+    <div class="card"><h3>APIs and business workflows</h3><p>Server-side authorization, hidden fields, out-of-order steps, and actions that should require a stronger check.</p></div>
+    <div class="card"><h3>AI features, when present</h3><p>Agent tool permissions, prompt injection paths, retrieval boundaries, and whether model-controlled input can trigger privileged actions.</p></div>
+  </div>
+</div></section>
+
+<section style="background:#eef2f6"><div class="wrap">
+  <h2>What you receive</h2>
+  <ol class="steps">
+    <li><strong>Written scope and authorization:</strong> the application, roles, accounts, testing window, and any prohibited actions.</li>
+    <li><strong>Manual testing:</strong> focused on the workflows and trust boundaries selected for your review.</li>
+    <li><strong>A prioritized report:</strong> reproducible evidence, impact, root cause, and fixes an engineer can act on.</li>
+    <li><strong>One retest:</strong> after you make the agreed fixes, I check whether the original issue remains.</li>
+  </ol>
+  <p class="note">A scoped review provides evidence about what was tested. It does not certify an application as free of vulnerabilities or replace a broader assessment when your customer or auditor requires one.</p>
+</div></section>
+
+<section><div class="wrap faq">
+  <h2>Questions small teams ask</h2>
+  <h3>When should we do this?</h3>
+  <p>Before a public launch, after adding major roles or tenant features, or before a customer relies on a new AI workflow. If you have an existing product, we can start with its highest-risk paths.</p>
+  <h3>Do you need our source code?</h3>
+  <p>No. Testing can begin with agreed test accounts and a running app. Source review can be added when it would help answer a specific question.</p>
+  <h3>How much does it cost?</h3>
+  <p>The current focused Launch Check starts at $750. Broader reviews depend on the roles, tenants, APIs, and workflows in scope. <a href="index.html#packages">See current packages</a>; you receive a fixed quote before testing.</p>
+  <h3>Can a scanner do this?</h3>
+  <p>Automated tools help find common technical issues. This review includes manual checks of your users, data, and workflows, where the intended permissions have to be understood to test them.</p>
+</div></section>
+
+<section><div class="wrap"><div class="band">
+  <h2>Tell me what your app must keep separate.</h2>
+  <p>Send the product URL, the types of users you have, and the one boundary you most want checked. I'll respond with a proposed scope. Testing starts only after written authorization.</p>
+  <a class="btn" href="mailto:jbluestine@bluejayappsec.com?subject=SaaS%20security%20review">Email Blue Jay</a>
+</div></div></section>
+</main>
+
+<footer><div class="wrap">Blue Jay Application Security · Manual application security testing for SaaS and AI products.<br>All testing requires written scope and authorization. © 2026 Blue Jay Software.</div></footer>
+</body>
+</html>

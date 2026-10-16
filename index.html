@@ -5,8 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta name="theme-color" content="#0b2c58">
-<title>Blue Jay Application Security · Manual AppSec for SaaS & AI products</title>
-<meta name="description" content="Manual application-security reviews for rapidly built SaaS and AI products. Auth, APIs, authorization/IDOR, tenant isolation, and AI-agent boundaries, with developer-ready fixes.">
+<title>Web App Security Testing for Small SaaS &amp; AI Teams | Blue Jay</title>
+<meta name="description" content="Manual web application security testing for small SaaS and AI teams across the US. Check access controls, APIs, tenant isolation, and AI agent permissions before launch. Clear fixes and one retest.">
+<link rel="canonical" href="https://bluejayappsec.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Blue Jay Application Security">
+<meta property="og:title" content="Web App Security Testing for Small SaaS &amp; AI Teams | Blue Jay">
+<meta property="og:description" content="Independent manual security reviews for small SaaS and AI teams, with practical fixes and a retest.">
+<meta property="og:url" content="https://bluejayappsec.com/">
+<meta property="og:image" content="https://bluejayappsec.com/logo.png">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Blue Jay Application Security",
+  "url": "https://bluejayappsec.com/",
+  "description": "Manual web application, API, and AI application security testing for small SaaS teams.",
+  "email": "jbluestine@bluejayappsec.com",
+  "areaServed": {"@type": "Country", "name": "United States"},
+  "founder": {
+    "@type": "Person",
+    "name": "Joshua Bluestine",
+    "sameAs": "https://github.com/joshua-bluestine"
+  }
+}
+</script>
 <style>
   :root{
     --navy:#0b2c58; --navy-2:#06203f; --blue:#0064d0; --blue-2:#0052ab; --blue-soft:#e7f0fb;
@@ -46,6 +70,8 @@
   .hero .actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
   .hero .note{color:#9fb2c4;font-size:.85rem;margin-top:1.2rem}
   @media(max-width:640px){.hero h1{font-size:2rem}}
+  .credit-strip{background:#e7f0fb;border-bottom:1px solid var(--line);padding:14px 0;color:var(--navy);font-size:.94rem}
+  .credit-strip a{font-weight:700}
 
   /* generic sections */
   section{padding:58px 0}
@@ -113,10 +139,8 @@
       <a class="link" href="#services">What I do</a>
       <a class="link" href="#packages">Packages</a>
       <a class="link" href="case-studies.html">Case studies</a>
-      <a class="link" href="llm-exploits.html">LLM exploits</a>
       <a class="link" href="self-check.html">Self-check</a>
-      <a class="link" href="#proof">Proof</a>
-      <a class="link" href="#faq">FAQ</a>
+      <a class="link" href="xoscar-control-plane-research.html">Research</a>
       <a class="cta btn" href="#contact">Book a review</a>
     </nav>
   </div>
@@ -125,11 +149,11 @@
 <a id="top"></a>
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">Manual application security · SaaS &amp; AI products</p>
-    <h1>I break AI-built SaaS applications before your users do.</h1>
-    <p class="sub">Your product was built fast, and it works. What nobody has checked is whether one customer can
-       quietly reach another's data, or whether your AI agent can be talked into an action the user was
-       never allowed to take. I test that by hand, then show you how to reproduce it and how to fix it.</p>
+    <p class="eyebrow">Manual security testing · small SaaS &amp; AI teams</p>
+    <h1>Security testing for your SaaS or AI app before launch.</h1>
+    <p class="sub">You built the product fast. I independently test its web app and APIs for the gaps a scanner
+       misses: one customer reaching another's data, a user crossing an admin boundary, or an AI agent taking an
+       action it should not. You get reproducible findings and practical fixes.</p>
     <div class="actions">
       <a class="btn" href="#contact">Book a pre-launch review</a>
       <a class="btn ghost" href="#sample">See a sample report</a>
@@ -139,6 +163,13 @@
   </div>
 </section>
 
+<div class="credit-strip">
+  <div class="wrap"><strong>Public security research:</strong> Joshua Bluestine is a credited reporter on the
+    <a href="xoscar-control-plane-research.html">Xoscar actor control-plane disclosure</a>, documented in
+    <a href="https://github.com/xorbitsai/xoscar/security/advisories/GHSA-mmvj-m246-m9vf">GHSA-mmvj-m246-m9vf / CVE-2026-49950</a>.
+  </div>
+</div>
+
 <!-- WHAT I DO -->
 <section id="services">
   <div class="wrap">
@@ -146,6 +177,8 @@
     <h2 class="section-title">The product works. Nobody has tested the trust boundaries.</h2>
     <p class="lead">Fast, AI-assisted development ships features quickly and skips the checks that decide whether one
        customer can reach another's data. That's the work I do, by hand.</p>
+    <p class="lead">For a small business with a customer-facing SaaS product, this is a focused web application
+       security review of the workflows that hold customer data and permissions. <a href="saas-security-review.html">See what a SaaS review covers</a>.</p>
     <div class="grid cols-3" style="margin-top:26px">
       <div class="card"><h3>Authorization &amp; IDOR/BOLA</h3><p>Can user A reach user B's data? Can a normal user hit an admin-only function? I test it the tedious way, one role and one object at a time.</p></div>
       <div class="card"><h3>Tenant isolation</h3><p>Multi-tenant products live or die on isolation. Being logged in isn't the same as being allowed, so I check that every read and write is scoped to the right tenant.</p></div>
@@ -272,6 +305,9 @@
       </div>
       <p class="lead" style="margin-top:16px">That combination is the point. Plenty of people can flag a broken assumption; I can also sit down
          and help you fix the code.</p>
+      <p class="lead"><strong>Credited disclosure:</strong> I reported an unauthenticated Xoscar actor control-plane
+         exposure that maintainers documented alongside another issue under CVE-2026-49950.
+         <a href="xoscar-control-plane-research.html">Read the research and advisory</a>.</p>
       <a class="btn dark" href="case-studies.html" style="margin-top:16px">See worked case studies →</a>
     </div>
   </div>
@@ -290,6 +326,11 @@
       <details><summary>We're a small team. Aren't we too small for this?</summary>
         <p>Small teams are where this pays off most. Fixing an authorization bug before launch is far cheaper
            than explaining a data breach to your customers after.</p></details>
+      <details><summary>What does a web application security review include?</summary>
+        <p>We agree on the app, API, test accounts, and priority workflows first. I manually check authentication,
+           authorization, tenant boundaries, and relevant business logic. AI products can add agent tools and data
+           isolation to the scope. You receive a prioritized report and one retest of agreed fixes.
+           <a href="saas-security-review.html">Read the full review outline</a>.</p></details>
       <details><summary>Can you guarantee we have no vulnerabilities?</summary>
         <p>No, and anyone who promises that is lying to you. A time-boxed review covers the areas we agreed to
            test, and the report is clear about what I didn't get to.</p></details>

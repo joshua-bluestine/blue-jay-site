@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="favicon.png">
+<meta name="theme-color" content="#0b2c58">
+<title>Xoscar Control-Plane Disclosure | Joshua Bluestine · Blue Jay</title>
+<meta name="description" content="Joshua Bluestine's credited Xoscar security disclosure: unauthenticated actor control-plane access. Read what was reported, how the maintainers addressed it, and the public advisory.">
+<link rel="canonical" href="https://bluejayappsec.com/xoscar-control-plane-research.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xoscar Control-Plane Disclosure | Joshua Bluestine">
+<meta property="og:description" content="A credited disclosure about missing authentication on Xoscar actor control functions.">
+<meta property="og:url" content="https://bluejayappsec.com/xoscar-control-plane-research.html">
+<meta property="og:image" content="https://bluejayappsec.com/logo.png">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0b2c58;--blue:#0064d0;--ink:#17212b;--muted:#4d5b69;--line:#e2e8ef;--bg:#f6f8fa;--maxw:900px}
+  *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+  a{color:var(--navy)}a:focus-visible{outline:3px solid #7fb3ff;outline-offset:2px}
+  .wrap{max-width:var(--maxw);margin:auto;padding:0 22px}
+  header{background:var(--navy);color:#fff}.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+  .brand{color:#fff;text-decoration:none;font-weight:800;display:flex;align-items:center;gap:9px}.brand img{width:35px;height:35px;background:#fff;border-radius:8px;object-fit:contain;padding:2px}
+  nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:#dbe7f4;text-decoration:none;font-size:.93rem}nav a:hover{color:#fff;text-decoration:underline}
+  main{padding:52px 0 70px}.eyebrow{color:var(--blue);text-transform:uppercase;letter-spacing:.13em;font-size:.8rem;font-weight:800}
+  h1{font-size:clamp(2rem,4vw,2.8rem);line-height:1.2;color:var(--navy);margin:10px 0 16px}h2{color:var(--navy);line-height:1.25;margin-top:36px}
+  .lead{font-size:1.16rem;color:var(--muted);max-width:72ch}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;margin:24px 0}
+  .meta{font-size:.92rem;color:var(--muted)}.btn{display:inline-block;background:var(--blue);color:#fff;padding:.7rem 1.12rem;border-radius:8px;text-decoration:none;font-weight:700}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.88rem}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="index.html"><img src="logo.png" alt="">Blue Jay Application Security</a>
+  <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="saas-security-review.html">SaaS review</a><a href="case-studies.html">Case studies</a><a href="index.html#contact">Contact</a></nav>
+</div></header>
+<main><article class="wrap">
+  <p class="eyebrow">Public security research</p>
+  <h1>Xoscar actor control-plane disclosure</h1>
+  <p class="lead">I reported unauthenticated access to Xoscar actor control functions. The maintainers documented this related exposure in the public advisory for GHSA-mmvj-m246-m9vf / CVE-2026-49950 and list me, Joshua Bluestine, as a reporter.</p>
+  <p class="meta">Joshua Bluestine · Published October 2026 · Coordinated disclosure</p>
+  <div class="card">
+    <strong>The public record</strong>
+    <p>My report concerned control messages that could reach an exposed actor-pool port without peer authentication. An unauthenticated peer could request configuration and topology information or stop a pool. This is related to the advisory's separate deserialization issue through the same missing peer-authentication boundary. I am a credited reporter on the combined advisory, not the sole reporter of its remote-code-execution finding.</p>
+    <a class="btn" href="https://github.com/xorbitsai/xoscar/security/advisories/GHSA-mmvj-m246-m9vf">Read the maintainer advisory</a>
+  </div>
+  <h2>Why this mattered</h2>
+  <p>Application-level login does not protect a separate internal actor transport. When an actor port is reachable by an untrusted peer, control operations need their own authentication. The issue illustrates a common assessment question: which internal interfaces quietly assume every network peer is trusted?</p>
+  <h2>Resolution and scope</h2>
+  <p>Xoscar 0.12.0 introduced opt-in actor-transport authentication using <code>XOSCAR_AUTH_KEY</code>. Administrators must configure a strong, nonempty key on every communicating process and restrict actor-port access to intended peers. The advisory states that an unset or empty key retains the legacy unauthenticated mode, so upgrading alone does not enable this protection.</p>
+  <p>The advisory consolidates multiple reports under one identifier. Its title and critical rating concern the deserialization path; my credited control-plane report should be understood as a related finding, not a claim that I discovered every issue in that advisory.</p>
+  <h2>What this says about my testing approach</h2>
+  <p>I test the trust boundary behind a feature, not only the feature's public interface. For SaaS products, that means checking the APIs and roles behind customer-facing screens. For AI systems, it includes the tools and internal services that a model or agent can call.</p>
+  <p><a href="saas-security-review.html">See how a SaaS security review works</a> or <a href="index.html#contact">get in touch about a scoped assessment</a>.</p>
+</article></main>
+<footer><div class="wrap">Blue Jay Application Security · Joshua Bluestine · <a href="index.html">Home</a></div></footer>
+</body>
+</html>
