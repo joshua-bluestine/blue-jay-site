@@ -26,3 +26,5 @@ The contact section uses `assets/contact.js` to send inquiries to the activated 
 Only a successful provider response confirms submission. Errors and timeouts retain the entered details. A honeypot and the provider's spam filtering protect the form; delivery and spam folders should still be monitored. FormSubmit processes submitted details and retains submissions according to its policy (currently 30 days). The page links to the provider's privacy policy and asks visitors not to include credentials or customer data.
 
 Changing the recipient requires activating the new inbox before publishing. No mail credentials or private API keys belong in this repository. The provider accepting a request does not guarantee inbox delivery.
+
+HTML asset references include version query strings. Update the affected version when changing CSS or JavaScript so returning visitors receive the current files.
