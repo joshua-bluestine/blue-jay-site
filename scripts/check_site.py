@@ -104,7 +104,7 @@ def main():
     if homepage:
         for anchor in ("coverage", "research", "approach", "deliverables", "plans", "faq", "contact"):
             check(anchor in homepage.ids, f"Homepage buyer flow missing #{anchor}")
-        for price in ("$1,500", "$2,500", "$750"):
+        for price in ("$2,000", "$1,500", "$3,000", "$1,000", "$500"):
             check(price in homepage.text, f"Homepage missing current price {price}")
         for name in PAGES[1:]:
             check(any(urlsplit(h).path.lstrip("/") == name for h in homepage.links),
