@@ -63,7 +63,7 @@
         });
       });
     }, { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
-    document.querySelectorAll('#research, #coverage, #approach, #plans, #contact').forEach(section => sectionObserver.observe(section));
+    document.querySelectorAll('#research, #coverage, #approach, #plans, #faq, #contact').forEach(section => sectionObserver.observe(section));
     const steps = [...document.querySelectorAll('[data-step]')];
     const dots = [...document.querySelectorAll('.process-dots i')];
     const processObserver = new IntersectionObserver(entries => {
@@ -78,7 +78,7 @@
     }, { rootMargin: '-20% 0px -45% 0px', threshold: 0 });
     steps.forEach(step => processObserver.observe(step));
   }
-  const aliases = { '#proof':'#research', '#services':'#coverage', '#sample':'#approach', '#faq':'#contact', '#questions':'#contact' };
+  const aliases = { '#proof':'#research', '#services':'#coverage', '#sample':'#deliverables', '#questions':'#faq' };
   function resolveHash() {
     let hash = window.location.hash;
     const aliased = Boolean(aliases[hash]);

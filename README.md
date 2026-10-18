@@ -1,17 +1,30 @@
 # Blue Jay Application Security
 
-Static single-page site for https://bluejayappsec.com, published by GitHub Pages from `main` at the repository root.
+Static website for https://bluejayappsec.com, published by GitHub Pages from `main` at the repository root. The homepage is a complete scrollable buyer journey; supporting pages provide focused service information and evidence.
 
 ## Structure
 
-- `index.html`: credentials, research, testing approach, plans, and contact.
+- `index.html`: positioning, credentials, coverage, approach, deliverables, pricing, buyer FAQs, appointment links and the inquiry form.
 - `assets/site.css`: responsive design and motion preferences.
+- `assets/content.css`: buyer FAQs, deliverables and supporting-page layouts.
 - `assets/site.js`: mobile navigation, scroll progress, reveals, process steps, and research deep links.
-- Existing research/service URLs redirect to their sections on the homepage; `llm-exploits.html#r1` through `#r5` retain their destinations.
-- Case studies and self-check have been removed. Missing URLs use `404.html`.
-- `sitemap.xml` includes the canonical homepage.
+- `ai-agent-security-testing.html`: AI/LLM review scope, retrieval and tool permissions, preparation and pricing.
+- `saas-security-review.html`: SaaS/API authorization, isolation and business-logic review scope.
+- `xoscar-control-plane-research.html`: credited contribution and mitigation, distinguished from the advisory's separate deserialization finding.
+- `llm-exploits.html`: existing self-hosted LLM lab evidence; `#r1` through `#r5` remain available.
+- `case-studies.html`: existing application lab reproductions; `#cs1` through `#cs3` remain available.
+- `sample-report.html`: explicitly fictional report, evidence and retest examples.
+- The homepage retains useful `#r1`–`#r5` summary anchors. Legacy `#sample` and `#questions` resolve to deliverables and FAQs. Old service/research URLs serve substantive pages with self canonicals, without noindex redirect stubs.
+- The retired self-check and other missing URLs use `404.html`; no unrelated homepage redirect is imposed.
+- `sitemap.xml` includes all seven canonical content pages. Update dates when their content changes.
 
 No build step or external JavaScript dependencies. Preview with `python -m http.server --bind 127.0.0.1`. Publish by committing reviewed changes and pushing to `main`.
+
+## Verification and search measurement
+
+Run `python scripts/check_site.py` to check metadata, schema JSON, sitemap coverage, local links and anchors, assets, and the complete homepage buyer path. Run `node --check assets/site.js` and `node --check assets/contact.js` for JavaScript syntax. Inspect the homepage and evidence pages at desktop and mobile widths, including menu, FAQ, deep links and plan selection. Do not submit the contact form or create a Calendly appointment during checks.
+
+After publication, submit `https://bluejayappsec.com/sitemap.xml` in the domain's Google Search Console property and inspect the homepage and restored URLs. Search Console ownership and property access are separate from this repository; absence of a verification meta tag does not mean the property is unverified. Measure impressions, queries, clicks and indexed pages there. Rankings, backlinks and Core Web Vitals are not established by the local checker. No analytics script or third-party tracking was introduced by these changes.
 
 ## Design references
 

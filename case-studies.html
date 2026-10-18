@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#080c14">
+<title>Application Security Lab Case Studies | Blue Jay</title><meta name="description" content="Three self-hosted application security lab case studies: BOLA, AI agent tool authorization and SQL injection, with captured evidence and fixes.">
+<link rel="canonical" href="https://bluejayappsec.com/case-studies.html"><link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Blue Jay Application Security">
+<meta property="og:title" content="Application Security Lab Case Studies | Blue Jay"><meta property="og:description" content="Three self-hosted application security lab case studies: BOLA, AI agent tool authorization and SQL injection, with captured evidence and fixes."><meta property="og:url" content="https://bluejayappsec.com/case-studies.html"><meta property="og:image" content="https://bluejayappsec.com/logo.png"><meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="assets/site.css?v=16f2727989"><link rel="stylesheet" href="assets/content.css?v=fbe03bf4f8"><script src="assets/site.js?v=d832b6dbbf" defer></script>
+<noscript><style>.motion-toggle,.menu-toggle{display:none}@media(max-width:680px){.header-inner{flex-wrap:wrap;padding-top:14px}.site-header nav{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0 0 12px;gap:12px;background:none;border:0}.site-header nav a{font-size:.7rem!important}.site-header nav>.button{margin:0}}</style></noscript>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://bluejayappsec.com/#business", "name": "Blue Jay Application Security", "url": "https://bluejayappsec.com/", "logo": "https://bluejayappsec.com/logo.png", "description": "Manual security testing for AI agents, LLM applications and SaaS APIs. Findings, practical fixes and one retest within an agreed scope.", "email": "jbluestine@bluejayappsec.com", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@id": "https://bluejayappsec.com/#joshua"}}, {"@type": "Person", "@id": "https://bluejayappsec.com/#joshua", "name": "Joshua Bluestine", "jobTitle": "Founder, Blue Jay Application Security", "sameAs": ["https://github.com/joshua-bluestine"], "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": "CompTIA Security+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA Network+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA A+"}], "url": "https://bluejayappsec.com/#joshua"}, {"@type": "TechArticle", "@id": "https://bluejayappsec.com/case-studies.html#page", "url": "https://bluejayappsec.com/case-studies.html", "name": "Application Security Lab Case Studies | Blue Jay", "description": "Three self-hosted application security lab case studies: BOLA, AI agent tool authorization and SQL injection, with captured evidence and fixes.", "inLanguage": "en", "author": {"@id": "https://bluejayappsec.com/#joshua"}, "publisher": {"@id": "https://bluejayappsec.com/#business"}, "headline": "Application security lab case studies", "mainEntityOfPage": "https://bluejayappsec.com/case-studies.html"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bluejayappsec.com/"}, {"@type": "ListItem", "position": 2, "name": "Application security lab case studies", "item": "https://bluejayappsec.com/case-studies.html"}]}]}</script>
+</head><body class="detail-page"><a class="skip-link" href="#main">Skip to content</a><div class="scroll-progress" aria-hidden="true"></div>
+<header class="site-header"><div class="shell header-inner">
+  <a href="./#top" class="brand" aria-label="Blue Jay Application Security, home"><img src="logo.png" alt="" width="38" height="38"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu <span class="menu-icon" aria-hidden="true"></span></button>
+  <nav id="main-nav" aria-label="Main navigation"><a href="./#research">Credentials</a><a href="./#approach">Approach</a><a href="./#plans">Testing plans</a><a href="https://calendly.com/jbluestine-bluejayappsec/intro-call" class="button button-small" target="_blank" rel="noopener noreferrer">Book a call <span aria-hidden="true">↗</span></a></nav>
+</div></header>
+<main id="main"><div class="shell reading-shell">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">/</span><span>Research / Application labs</span></nav>
+<header class="page-hero"><p class="eyebrow">Research / Application labs</p><h1>Application security lab case studies</h1><p class="page-lead">Worked examples of access-control and injection failures in intentionally vulnerable applications. Follow the request, root cause and fix.</p><a class="text-link" href="https://calendly.com/jbluestine-bluejayappsec/intro-call" target="_blank" rel="noopener noreferrer">Discuss your scope in a 15-min call <span aria-hidden="true">↗</span></a></header>
+<div class="page-body"><div class="lab-content"><!-- FRAMING + INDEX -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How to read these</p>
+    <h2 class="section-title">Real exploits. Recognized labs. No client data.</h2>
+    <div class="note-box">
+      <strong>Honest framing:</strong> these are reproductions against well-known, intentionally-vulnerable,
+      <strong>self-hosted</strong> applications (OWASP crAPI, OWASP Juice Shop, WithSecure's Damn Vulnerable
+      LLM Agent). None of this is real client work, and every bit of testing was authorized. Every command, response,
+      and payload below is <strong>real captured output</strong> from running the exploit myself. Client work is
+      confidential and never published; these public labs let me show the depth without ever exposing a customer.
+    </div>
+
+    <div class="grid cols-3">
+      <a class="idx" href="#cs1">
+        <span class="sev high">High</span>
+        <h3>1 &middot; Broken object-level authorization (BOLA)</h3>
+        <p>An account owning zero vehicles reads another user's live GPS location and email. OWASP crAPI.</p>
+      </a>
+      <a class="idx" href="#cs2">
+        <span class="sev high">High</span>
+        <h3>2 &middot; AI agent tool authz + SQL injection</h3>
+        <p>Direct calls to a banking agent's tool expose other users' data and credentials. WithSecure DVLA.</p>
+      </a>
+      <a class="idx" href="#cs3">
+        <span class="sev critical">Critical</span>
+        <h3>3 &middot; SQL injection &rarr; admin auth bypass</h3>
+        <p>One login request logs in as administrator with no password. Comes with the corrected code and a passing retest. OWASP Juice Shop.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY 1 -->
+<section>
+  <div class="wrap">
+    <a id="cs1"></a>
+    <div class="article">
+      <span class="num">Case Study 1</span>
+      <h2>Reading another user's live vehicle location via BOLA <span class="sev high">High</span></h2>
+      <div class="cs-meta">
+        <span><b>Target:</b> OWASP crAPI (self-hosted)</span>
+        <span><b>Class:</b> Broken access control / BOLA + excessive data exposure</span>
+      </div>
+
+      <div class="kv"><span class="label">Context</span>
+        <p>crAPI is OWASP's deliberately-vulnerable, realistic vehicle-service SaaS API with real user roles,
+           JWT auth, and a community forum. A close stand-in for the multi-tenant SaaS APIs I test.</p></div>
+
+      <div class="kv"><span class="label">Finding</span>
+        <p>An authenticated attacker who owns no vehicles can read any other user's real-time GPS location.
+           The community endpoint leaks other users' email + vehicleid (excessive data exposure); that
+           vehicleid then works on the location endpoint, which never checks ownership.</p></div>
+
+      <div class="kv"><span class="label">Impact</span>
+        <p>Any free account can track any other customer's physical location in real time and harvest their
+           email. That's a privacy and physical-safety breach, and all it takes to cross that boundary is a free signup.</p></div>
+
+      <div class="kv"><span class="label">Evidence: real captured output</span>
+        <div class="evidence"><pre># attacker owns NO vehicles
+GET /identity/api/v2/vehicle/vehicles            -> []
+
+# community endpoint leaks another user's identifiers
+GET /community/api/v2/community/posts/recent
+  victim -> email: robot001@example.com  vehicleid: 4bae9968-...-e5e5
+
+# BOLA: victim's location, fetched with the ATTACKER's token
+GET /identity/api/v2/vehicle/4bae9968-...-e5e5/location
+HTTP/1.1 200 OK
+{"carId":"4bae9968-...","vehicleLocation":{"latitude":"37.746880",
+  "longitude":"-84.301460"},"fullName":"Robot","email":"robot001@example.com"}</pre></div></div>
+
+      <div class="kv"><span class="label">Root cause</span>
+        <p>The location endpoint authorizes on authentication (a valid JWT) but not on object ownership. It never
+           asks whether the vehicle belongs to the caller. Separately, the community response returns fields the caller
+           has no need to see (email, vehicleid), supplying the id used above.</p></div>
+
+      <div class="kv"><span class="label">Remediation</span>
+        <p>Enforce server-side ownership on every object lookup: the vehicle's owner must equal the caller, else
+           return 404. Trim the community response to non-sensitive fields only. Add object-level authorization tests to CI.</p></div>
+
+      <div class="kv"><span class="label">Expected retest behavior</span>
+        <p>After applying the ownership check, the cross-user request should return 403 or 404 without location or
+           personal data. The community feed should omit other users' email and vehicle identifiers, while legitimate
+           owner access still succeeds. This section describes the checks to perform; it does not present a captured retest result.</p></div>
+
+      <p class="repro">Reproduce: <code>cs1_idor_crapi/exploit_crapi_bola.sh</code> (crAPI up on :8888) &middot;
+        <a href="https://github.com/joshua-bluestine/blue-jay-appsec-case-studies/tree/main/cs1_idor_crapi" target="_blank" rel="noopener">script &amp; evidence on GitHub</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY 2 -->
+<section>
+  <div class="wrap">
+    <a id="cs2"></a>
+    <div class="article">
+      <span class="num">Case Study 2</span>
+      <h2>An AI agent's tool trusts model-controlled input <span class="sev high">High</span></h2>
+      <div class="cs-meta">
+        <span><b>Target:</b> WithSecure "Damn Vulnerable LLM Agent" (self-hosted)</span>
+        <span><b>Class:</b> LLM/agent tool authorization + injection</span>
+      </div>
+
+      <div class="kv"><span class="label">Context</span>
+        <p>A LangChain ReAct "banking assistant" whose system prompt explicitly says to operate ONLY on the
+           current user's id and refuse any other. It exposes a <code>GetUserTransactions</code> tool. It's a
+           faithful model of the agent/tool boundary I test in AI products.</p></div>
+
+      <div class="kv"><span class="label">Finding</span>
+        <p>The tool trusts the id it is handed: it returns another user's transactions without ownership scoping
+           and interpolates that id directly into SQL. The reproduction below calls the tool directly to demonstrate
+           both failures. It does not establish an end-to-end prompt-injection bypass through the conversational agent.</p></div>
+
+      <div class="kv"><span class="label">Impact</span>
+        <p>In the self-hosted lab, attacker-controlled tool arguments return another user's transactions and,
+           through SQL injection, the users' stored credentials. The tool therefore needs its own authorization
+           and input handling, independently of the assistant's prompt rules.</p></div>
+
+      <div class="kv"><span class="label">Evidence: real captured output</span>
+        <div class="evidence"><pre>guardrail (system prompt): operate ONLY on GetCurrentUser()'s id (user 1); refuse others.
+
+[BOLA]  GetUserTransactions('2')  -> another user's data:
+  {"transactionId":3,"userId":2,"reference":"PlutoniumPurchase",
+   "recipient":"FLAG:plutonium-256","amount":5000.0}
+
+[SQLi]  GetUserTransactions("0' UNION SELECT userId,username,password,'sqli',0 FROM Users-- ")
+  -> MartyMcFly:Password1  DocBrown:flux-capacitor-123  BiffTannen:Password3 ...
+
+[retest] scoped + parameterized tool: cross-user leak = False; credential dump = False; own-data = True  -> PASSED</pre></div></div>
+
+      <div class="kv"><span class="label">Root cause</span>
+        <p>The tool derives authority from model/user-controlled arguments instead of the authenticated session, and
+           builds SQL by string interpolation. Model output is treated as trusted input to a privileged data action.</p></div>
+
+      <div class="kv"><span class="label">Remediation</span>
+        <p>Treat model output as untrusted. Scope the query to the authenticated user server-side and ignore any
+           model-supplied id; parameterize the SQL; require confirmation for sensitive tool actions.</p></div>
+
+      <div class="kv"><span class="label">Retest</span>
+        <p>PASSED. With the scoped, parameterized tool the cross-user request returns only the caller's own
+           rows and the injection payload is inert, while legitimate use still works.</p></div>
+
+      <p class="repro">Reproduce: <code>cs2_ai_agent/cs2_tool_layer_exploit.py</code> + <code>cs2_fix_retest.py</code> &middot;
+        <a href="https://github.com/joshua-bluestine/blue-jay-appsec-case-studies/tree/main/cs2_ai_agent" target="_blank" rel="noopener">scripts &amp; evidence on GitHub</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY 3 -->
+<section>
+  <div class="wrap">
+    <a id="cs3"></a>
+    <div class="article">
+      <span class="num">Case Study 3</span>
+      <h2>SQL injection in login &rarr; authentication bypass as administrator <span class="sev critical">Critical</span></h2>
+      <div class="cs-meta">
+        <span><b>Target:</b> OWASP Juice Shop v20.2.0 (self-hosted)</span>
+        <span><b>Class:</b> SQL injection / auth bypass &middot; insecure code &rarr; fix &rarr; regression</span>
+      </div>
+
+      <div class="kv"><span class="label">Context</span>
+        <p>Juice Shop is the most widely recognized deliberately-vulnerable web app. This one goes past the exploit to the corrected code, plus a
+           regression test that proves the fix holds.</p></div>
+
+      <div class="kv"><span class="label">Finding</span>
+        <p>The login endpoint builds its SQL by string-interpolating the email field. The payload <code>' OR 1=1--</code>
+           in the email logs the attacker in as the first user, the administrator, with no valid password.</p></div>
+
+      <div class="kv"><span class="label">Impact</span>
+        <p>Full administrator account takeover with no credentials: a single request returns an admin session token
+           (decoded JWT role = admin).</p></div>
+
+      <div class="kv"><span class="label">Evidence: real captured output</span>
+        <div class="evidence"><pre># baseline: correct endpoint, wrong password
+POST /rest/user/login {"email":"admin@juice-sh.op","password":"wrong"}  -> 401
+
+# exploit: SQL injection in the email field
+POST /rest/user/login {"email":"' OR 1=1--","password":"anything"}  -> 200 OK
+  authentication.umail = admin@juice-sh.op   (decoded JWT role: admin)
+
+# vulnerable code -- routes/login.ts:34
+models.sequelize.query(`SELECT * FROM Users WHERE email = '${req.body.email||''}'
+  AND password = '${security.hash(req.body.password||'')}' AND deletedAt IS NULL`)
+
+# remediation retest (parameterized query), same payload:
+  inject -> no row (denied)   valid login -> ok   wrong password -> denied   -> PASSED</pre></div></div>
+
+      <div class="kv"><span class="label">Root cause</span>
+        <p>User input (email) is concatenated into the SQL statement, so input can change the query's structure. That's the classic SQL-injection root cause.</p></div>
+
+      <div class="kv"><span class="label">Remediation</span>
+        <p>Use parameterized queries / an ORM binding so input can never alter SQL structure
+           (e.g. <code>WHERE email = ? AND password = ?</code>). Never interpolate request fields into SQL.</p></div>
+
+      <div class="kv"><span class="label">Retest</span>
+        <p>PASSED. A faithful reproduction of the same query shows the injection succeeds before the fix and fails
+           after, while valid login still works and a wrong password is still rejected.</p></div>
+
+      <p class="repro">Reproduce: <code>cs3_sqli_juiceshop/sqli_fix_reproduction.py</code> (live exploit + fix) &middot;
+        <a href="https://github.com/joshua-bluestine/blue-jay-appsec-case-studies/tree/main/cs3_sqli_juiceshop" target="_blank" rel="noopener">script &amp; evidence on GitHub</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+</div><p>For your product, explore <a href="saas-security-review.html">SaaS and API reviews</a> or <a href="ai-agent-security-testing.html">AI agent security testing</a>.</p></div><section class="page-cta"><p class="eyebrow">Your next step</p><h2>Talk through your product.</h2><p>Bring your product, your timeline, and the questions your customers are asking. We’ll use a 15-minute call to discuss fit and scope.</p><div class="actions"><a class="button" href="https://calendly.com/jbluestine-bluejayappsec/intro-call" target="_blank" rel="noopener noreferrer">Book a 15-min intro call <span aria-hidden="true">↗</span></a><a class="text-link" href="./#plans">Compare testing plans →</a></div></section>
+</div></main><footer class="site-footer"><div class="shell footer-top"><a class="brand" href="./#top"><img src="logo.png" alt="" width="34" height="34"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a><p>Independent testing.<br>Clear evidence. Practical fixes.</p><nav class="footer-links" aria-label="Services and resources">
+<a href="ai-agent-security-testing.html">AI &amp; LLM security testing</a><a href="saas-security-review.html">SaaS &amp; API security reviews</a><a href="xoscar-control-plane-research.html">Xoscar research</a><a href="llm-exploits.html">LLM testing notes</a><a href="case-studies.html">Lab case studies</a><a href="sample-report.html">Sample report</a><a href="./#faq">Questions</a><a href="./#contact">Contact</a></nav></div><div class="shell footer-bottom"><span>© <span id="year">2026</span> Blue Jay Software</span><span>All testing requires written scope and authorization.</span><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button></div></footer></body></html>
