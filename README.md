@@ -30,7 +30,7 @@ After publication, submit `https://bluejayappsec.com/sitemap.xml` in the domain'
 
 The October 2026 redesign adapts large typography, quiet sticky navigation, dimensional graphics, and section-based storytelling from [Linear](https://linear.app/), [Vercel](https://vercel.com/), and [Resend](https://resend.com/). Graphics and implementation are original to this site. Scrolling remains native, motion can be paused, and system reduced-motion preferences are respected.
 
-Monthly testing is quoted individually: hours, fee, and launch discount must be agreed before work begins.
+Security Review is $1,500 for one agreed application or AI workflow, with findings, remediation guidance, a results call and one retest. Review + Fix starts at $2,500, with implementation limited to specifically agreed fixes and final pricing based on remediation scope. Ongoing Security Support is $750/month after an initial review, with up to five hours monthly across change reviews, targeted testing, fix verification and consultation; larger work is quoted separately. There is no introductory or testimonial discount.
 
 ## Inquiry form
 
