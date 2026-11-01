@@ -56,7 +56,7 @@
       pending = false;
       fields.disabled = false;
       form.removeAttribute('aria-busy');
-      button.textContent = 'Send review request ↗';
+      button.textContent = 'Send request ↗';
       status.focus();
     }
   });
