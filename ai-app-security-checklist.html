@@ -25,7 +25,7 @@
 
 <section><h2>1. Your database and user data</h2>
 <ul>
-<li><strong>Every table holding user data has row-level security on</strong> (Supabase) or locked-down security rules (Firebase). <a href="supabase-rls-check.html">How to check your Supabase RLS</a>.</li>
+<li><strong>Every table holding user data has row-level security on</strong> (Supabase) or locked-down security rules (Firebase). How to check your <a href="supabase-rls-check.html">Supabase RLS</a> or <a href="firebase-security-rules-check.html">Firebase rules</a>.</li>
 <li><strong>No private table is readable by everyone.</strong> Look for <code>using (true)</code> policies in Supabase, or <code>allow read, write: if true</code> in Firebase rules.</li>
 <li><strong>User A can’t see or change User B’s data.</strong> Sign in as one test account and try to open the other’s records, for example by changing an ID in the URL or in a request.</li>
 <li><strong>Uploaded files are private.</strong> Private uploads live in a private bucket, and one user can’t download another’s files by guessing a link.</li>
@@ -36,7 +36,7 @@
 <ul>
 <li><strong>No secret key reaches the browser:</strong> OpenAI, Anthropic, Stripe secret, or Supabase secret / <code>service_role</code>. <a href="exposed-api-keys.html">How to check for exposed keys</a>.</li>
 <li><strong>Your <code>.env</code> file was never committed</strong> to your repository.</li>
-<li><strong>Every key that was ever exposed has been rotated</strong>, not just removed from the code.</li>
+<li><strong>Every key that was ever exposed has been rotated</strong>, not just removed from the code. <a href="leaked-api-key-what-to-do.html">What to do when a key leaks</a>.</li>
 <li><strong>Spending limits and alerts are set</strong> with your AI provider.</li>
 </ul>
 </section>

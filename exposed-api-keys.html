@@ -43,7 +43,7 @@
 <ol class="step-list">
 <li><strong>Move the call to a server.</strong> Your browser should call <em>your</em> backend, and your backend calls the AI provider. On Supabase that’s an Edge Function; on Next.js, a route handler; elsewhere, any serverless function. Store the key as a server-side secret with no <code>VITE_</code> or <code>NEXT_PUBLIC_</code> prefix.</li>
 <li><strong>Lock down the new endpoint.</strong> This step is what most fixes miss. If your new endpoint answers anyone, you’ve just built a free proxy for your API key. Require a signed-in user, limit how many requests each user can make, cap the input size, and fix the model and settings on the server rather than accepting them from the browser.</li>
-<li><strong>Rotate the key.</strong> Treat any key that was ever in the browser or a public repo as compromised, even if you fixed the code. Create a new key in the provider’s dashboard, put it on the server, then delete the old one.</li>
+<li><strong>Rotate the key.</strong> Treat any key that was ever in the browser or a public repo as compromised, even if you fixed the code. Create a new key in the provider’s dashboard, put it on the server, then delete the old one. See <a href="leaked-api-key-what-to-do.html">what to do when a key leaks</a> for step-by-step instructions per provider.</li>
 <li><strong>Set spending limits.</strong> In your AI provider’s billing settings, set a monthly budget or usage limit and an email alert, so a leak becomes an alert rather than a surprise invoice.</li>
 </ol>
 </section>
