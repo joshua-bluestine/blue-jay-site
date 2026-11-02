@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#080c14">
+<title>Pre-Launch Security Checklist for AI-Built Apps | Blue Jay</title><meta name="description" content="A pre-launch security checklist for apps built with Lovable, Bolt, Cursor or Replit: database rules, keys, logins, AI features and payments, in plain English.">
+<link rel="canonical" href="https://bluejayappsec.com/ai-app-security-checklist.html"><link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Blue Jay Application Security">
+<meta property="og:title" content="Pre-Launch Security Checklist for AI-Built Apps | Blue Jay"><meta property="og:description" content="A pre-launch security checklist for apps built with Lovable, Bolt, Cursor or Replit: database rules, keys, logins, AI features and payments, in plain English."><meta property="og:url" content="https://bluejayappsec.com/ai-app-security-checklist.html"><meta property="og:image" content="https://bluejayappsec.com/social-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Blue Jay AppSec: security checks for AI-built apps"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Pre-Launch Security Checklist for AI-Built Apps | Blue Jay"><meta name="twitter:description" content="A pre-launch security checklist for apps built with Lovable, Bolt, Cursor or Replit: database rules, keys, logins, AI features and payments, in plain English."><meta name="twitter:image" content="https://bluejayappsec.com/social-card.png">
+<link rel="stylesheet" href="assets/site.css?v=16f2727989"><link rel="stylesheet" href="assets/content.css?v=fbe03bf4f8"><script src="assets/site.js?v=d832b6dbbf" defer></script>
+<noscript><style>.motion-toggle,.menu-toggle{display:none}@media(max-width:680px){.header-inner{flex-wrap:wrap;padding-top:14px}.site-header nav{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0 0 12px;gap:12px;background:none;border:0}.site-header nav a{font-size:.7rem!important}.site-header nav>.button{margin:0}}</style></noscript>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://bluejayappsec.com/#business", "name": "Blue Jay Application Security", "url": "https://bluejayappsec.com/", "logo": "https://bluejayappsec.com/logo.png", "description": "Manual security checks for apps built with AI coding tools and apps with LLM features: exposed keys, database access rules, API authorization and prompt injection. Plain-English findings, copy-paste fixes and a recheck.", "email": "jbluestine@bluejayappsec.com", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@id": "https://bluejayappsec.com/#joshua"}}, {"@type": "Person", "@id": "https://bluejayappsec.com/#joshua", "name": "Joshua Bluestine", "jobTitle": "Founder, Blue Jay Application Security", "sameAs": ["https://github.com/joshua-bluestine"], "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": "CompTIA Security+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA Network+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA A+"}], "url": "https://bluejayappsec.com/#joshua"}, {"@type": "TechArticle", "@id": "https://bluejayappsec.com/ai-app-security-checklist.html#article", "url": "https://bluejayappsec.com/ai-app-security-checklist.html", "headline": "The pre-launch security checklist for AI-built apps", "name": "Pre-Launch Security Checklist for AI-Built Apps | Blue Jay", "description": "A pre-launch security checklist for apps built with Lovable, Bolt, Cursor or Replit: database rules, keys, logins, AI features and payments, in plain English.", "inLanguage": "en", "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://bluejayappsec.com/social-card.png", "author": {"@id": "https://bluejayappsec.com/#joshua"}, "publisher": {"@id": "https://bluejayappsec.com/#business"}, "mainEntityOfPage": "https://bluejayappsec.com/ai-app-security-checklist.html", "isPartOf": {"@id": "https://bluejayappsec.com/guides.html#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bluejayappsec.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://bluejayappsec.com/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Pre-launch checklist", "item": "https://bluejayappsec.com/ai-app-security-checklist.html"}]}]}</script>
+</head><body class="detail-page"><a class="skip-link" href="#main">Skip to content</a><div class="scroll-progress" aria-hidden="true"></div>
+<header class="site-header"><div class="shell header-inner">
+  <a href="./#top" class="brand" aria-label="Blue Jay Application Security, home"><img src="logo.png" alt="" width="38" height="38"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu <span class="menu-icon" aria-hidden="true"></span></button>
+  <nav id="main-nav" aria-label="Main navigation"><a href="./#research">Credentials</a><a href="./#coverage">What I check</a><a href="guides.html">Guides</a><a href="./#plans">Pricing</a><a href="https://calendly.com/jbluestine-bluejayappsec/intro-call" class="button button-small" target="_blank" rel="noopener noreferrer">Book a call <span aria-hidden="true">↗</span></a></nav>
+</div></header>
+<main id="main"><div class="shell reading-shell">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">/</span><a href="guides.html">Guides</a><span aria-hidden="true">/</span><span>Pre-launch checklist</span></nav>
+<header class="page-hero"><p class="eyebrow">Guides / Pre-launch checklist</p><h1>The pre-launch security checklist for AI-built apps</h1><p class="page-lead">You built it fast, and it works. Before real users sign up, pay or upload anything, run through this list. Each item is something AI coding tools commonly get wrong, explained in plain English with how to check it.</p><a class="text-link" href="./#contact" data-plan="Launch Check">Get your app checked by hand <span aria-hidden="true">↗</span></a></header>
+<div class="page-body"><p class="article-byline">By Joshua Bluestine · Published November 1, 2026</p>
+
+<section><h2>How to use this list</h2>
+<p>You don’t need a security background. Set up two test accounts, keep this page open and work through it section by section. Anything you can’t confidently tick is worth fixing, or worth asking someone to check, before launch.</p>
+</section>
+
+<section><h2>1. Your database and user data</h2>
+<ul>
+<li><strong>Every table holding user data has row-level security on</strong> (Supabase) or locked-down security rules (Firebase). <a href="supabase-rls-check.html">How to check your Supabase RLS</a>.</li>
+<li><strong>No private table is readable by everyone.</strong> Look for <code>using (true)</code> policies in Supabase, or <code>allow read, write: if true</code> in Firebase rules.</li>
+<li><strong>User A can’t see or change User B’s data.</strong> Sign in as one test account and try to open the other’s records, for example by changing an ID in the URL or in a request.</li>
+<li><strong>Uploaded files are private.</strong> Private uploads live in a private bucket, and one user can’t download another’s files by guessing a link.</li>
+</ul>
+</section>
+
+<section><h2>2. Keys and secrets</h2>
+<ul>
+<li><strong>No secret key reaches the browser:</strong> OpenAI, Anthropic, Stripe secret, or Supabase secret / <code>service_role</code>. <a href="exposed-api-keys.html">How to check for exposed keys</a>.</li>
+<li><strong>Your <code>.env</code> file was never committed</strong> to your repository.</li>
+<li><strong>Every key that was ever exposed has been rotated</strong>, not just removed from the code.</li>
+<li><strong>Spending limits and alerts are set</strong> with your AI provider.</li>
+</ul>
+</section>
+
+<section><h2>3. Logins, pages and API routes</h2>
+<ul>
+<li><strong>Every API route checks who’s calling on the server.</strong> Hiding a button in the interface doesn’t stop someone calling the route directly.</li>
+<li><strong>Admin pages and actions are checked on the server</strong>, not just hidden from the menu for regular users.</li>
+<li><strong>Users can’t make themselves admins</strong> by editing a <code>role</code> or <code>is_admin</code> field on their own profile.</li>
+<li><strong>Error messages don’t leak details</strong> like stack traces, SQL queries or internal file paths.</li>
+</ul>
+</section>
+
+<section><h2>4. Your AI features</h2>
+<ul>
+<li><strong>Your system prompt contains no secrets.</strong> Assume users can get the AI to repeat its instructions, because they often can.</li>
+<li><strong>The AI can only reach the current user’s data.</strong> If it searches documents or a database, that search must apply the same permissions as the rest of your app.</li>
+<li><strong>Actions the AI can take are checked on the server.</strong> If your assistant can send emails, change records or spend money, the server confirms the user is allowed to do that, whatever the AI was told.</li>
+<li><strong>AI endpoints require login and are rate limited</strong>, so strangers can’t run up your bill.</li>
+<li><strong>AI output is treated as untrusted.</strong> Don’t render it as raw HTML or run it as code, since a crafted message or document can make the AI produce anything.</li>
+</ul>
+</section>
+
+<section><h2>5. Payments</h2>
+<ul>
+<li><strong>Prices come from your server</strong>, never from a value the browser sends.</li>
+<li><strong>Paid access is granted only after your server confirms the payment</strong>, for example via a verified Stripe webhook, not because the browser landed on a “success” page.</li>
+<li><strong>Webhook signatures are verified</strong>, so nobody can fake a “payment succeeded” event.</li>
+</ul>
+</section>
+
+<section><h2>A prompt to start the review in your AI tool</h2>
+<p>Your coding tool can help you work through this list. Treat its answers as a starting point, not a sign-off, and test the important items yourself with two accounts.</p>
+<pre><code>Review this app for launch security. For each item, tell me whether it is
+handled, show me where in the code, and propose a fix if it is not:
+- Row-level security / security rules on every table with user data
+- Users cannot read or change other users' data or files
+- No secret API keys in frontend code or client-side env vars
+- Every API route and admin action checks the user on the server
+- AI features only access the current user's data, are rate limited,
+  and their output is never rendered as raw HTML
+- Prices and paid access are verified on the server (Stripe webhooks
+  with signature verification)
+Do not change anything yet; give me the list first.</code></pre>
+</section>
+
+<section><h2>Want it checked by hand?</h2>
+<p>A checklist catches the obvious problems. Testing catches the ones you didn’t think to look for. The <a href="./#plans">Launch Check</a> covers the riskiest items on this list for $400, with plain-English findings, fixes you can paste into your AI tool, and a recheck once you’ve fixed them.</p>
+</section>
+</div><section class="page-cta"><p class="eyebrow">Want a second pair of eyes?</p><h2>Get your app checked before launch.</h2><p>The Launch Check covers your database rules, exposed keys, unprotected routes and AI features by hand, with plain-English findings, fixes you can paste into your AI coding tool, and a recheck. $400, fixed price.</p><div class="actions"><a class="button" href="./#contact" data-plan="Launch Check">Get a launch check <span aria-hidden="true">↗</span></a><a class="text-link" href="guides.html">More guides →</a></div></section>
+</div></main><footer class="site-footer"><div class="shell footer-top"><a class="brand" href="./#top"><img src="logo.png" alt="" width="34" height="34"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a><p>Security checks for AI-built apps.<br>Plain English. Fixes you can paste.</p><nav class="footer-links" aria-label="Services and resources">
+<a href="ai-agent-security-testing.html">AI &amp; LLM security checks</a><a href="saas-security-review.html">Data &amp; API security checks</a><a href="guides.html">Security guides</a><a href="xoscar-control-plane-research.html">Xoscar research</a><a href="llm-exploits.html">LLM testing notes</a><a href="case-studies.html">Lab case studies</a><a href="sample-report.html">Sample report</a><a href="./#faq">Questions</a><a href="./#contact">Contact</a></nav></div><div class="shell footer-bottom"><span>© <span id="year">2026</span> Blue Jay Software</span><span>All testing requires written scope and authorization.</span><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button></div></footer></body></html>

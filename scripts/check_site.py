@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://bluejayappsec.com"
 PAGES = ["index.html", "ai-agent-security-testing.html", "saas-security-review.html",
          "xoscar-control-plane-research.html", "llm-exploits.html", "case-studies.html",
-         "sample-report.html"]
+         "sample-report.html", "guides.html", "supabase-rls-check.html", "exposed-api-keys.html", "ai-app-security-checklist.html"]
 BOOKING = "https://calendly.com/jbluestine-bluejayappsec/intro-call"
 
 

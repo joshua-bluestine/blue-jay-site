@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#080c14">
+<title>Is Your OpenAI API Key Exposed in Your Frontend? | Blue Jay</title><meta name="description" content="How to check whether your AI app sends its OpenAI, Anthropic or Stripe secret key to the browser, and how to move it server-side, lock it down and rotate it.">
+<link rel="canonical" href="https://bluejayappsec.com/exposed-api-keys.html"><link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Blue Jay Application Security">
+<meta property="og:title" content="Is Your OpenAI API Key Exposed in Your Frontend? | Blue Jay"><meta property="og:description" content="How to check whether your AI app sends its OpenAI, Anthropic or Stripe secret key to the browser, and how to move it server-side, lock it down and rotate it."><meta property="og:url" content="https://bluejayappsec.com/exposed-api-keys.html"><meta property="og:image" content="https://bluejayappsec.com/social-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Blue Jay AppSec: security checks for AI-built apps"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Is Your OpenAI API Key Exposed in Your Frontend? | Blue Jay"><meta name="twitter:description" content="How to check whether your AI app sends its OpenAI, Anthropic or Stripe secret key to the browser, and how to move it server-side, lock it down and rotate it."><meta name="twitter:image" content="https://bluejayappsec.com/social-card.png">
+<link rel="stylesheet" href="assets/site.css?v=16f2727989"><link rel="stylesheet" href="assets/content.css?v=fbe03bf4f8"><script src="assets/site.js?v=d832b6dbbf" defer></script>
+<noscript><style>.motion-toggle,.menu-toggle{display:none}@media(max-width:680px){.header-inner{flex-wrap:wrap;padding-top:14px}.site-header nav{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0 0 12px;gap:12px;background:none;border:0}.site-header nav a{font-size:.7rem!important}.site-header nav>.button{margin:0}}</style></noscript>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://bluejayappsec.com/#business", "name": "Blue Jay Application Security", "url": "https://bluejayappsec.com/", "logo": "https://bluejayappsec.com/logo.png", "description": "Manual security checks for apps built with AI coding tools and apps with LLM features: exposed keys, database access rules, API authorization and prompt injection. Plain-English findings, copy-paste fixes and a recheck.", "email": "jbluestine@bluejayappsec.com", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@id": "https://bluejayappsec.com/#joshua"}}, {"@type": "Person", "@id": "https://bluejayappsec.com/#joshua", "name": "Joshua Bluestine", "jobTitle": "Founder, Blue Jay Application Security", "sameAs": ["https://github.com/joshua-bluestine"], "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": "CompTIA Security+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA Network+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA A+"}], "url": "https://bluejayappsec.com/#joshua"}, {"@type": "TechArticle", "@id": "https://bluejayappsec.com/exposed-api-keys.html#article", "url": "https://bluejayappsec.com/exposed-api-keys.html", "headline": "Is your OpenAI API key exposed in your frontend?", "name": "Is Your OpenAI API Key Exposed in Your Frontend? | Blue Jay", "description": "How to check whether your AI app sends its OpenAI, Anthropic or Stripe secret key to the browser, and how to move it server-side, lock it down and rotate it.", "inLanguage": "en", "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://bluejayappsec.com/social-card.png", "author": {"@id": "https://bluejayappsec.com/#joshua"}, "publisher": {"@id": "https://bluejayappsec.com/#business"}, "mainEntityOfPage": "https://bluejayappsec.com/exposed-api-keys.html", "isPartOf": {"@id": "https://bluejayappsec.com/guides.html#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bluejayappsec.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://bluejayappsec.com/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Exposed API keys", "item": "https://bluejayappsec.com/exposed-api-keys.html"}]}]}</script>
+</head><body class="detail-page"><a class="skip-link" href="#main">Skip to content</a><div class="scroll-progress" aria-hidden="true"></div>
+<header class="site-header"><div class="shell header-inner">
+  <a href="./#top" class="brand" aria-label="Blue Jay Application Security, home"><img src="logo.png" alt="" width="38" height="38"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a>
+  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Menu <span class="menu-icon" aria-hidden="true"></span></button>
+  <nav id="main-nav" aria-label="Main navigation"><a href="./#research">Credentials</a><a href="./#coverage">What I check</a><a href="guides.html">Guides</a><a href="./#plans">Pricing</a><a href="https://calendly.com/jbluestine-bluejayappsec/intro-call" class="button button-small" target="_blank" rel="noopener noreferrer">Book a call <span aria-hidden="true">↗</span></a></nav>
+</div></header>
+<main id="main"><div class="shell reading-shell">
+<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">/</span><a href="guides.html">Guides</a><span aria-hidden="true">/</span><span>Exposed API keys</span></nav>
+<header class="page-hero"><p class="eyebrow">Guides / Exposed API keys</p><h1>Is your OpenAI API key exposed in your frontend?</h1><p class="page-lead">AI coding tools often wire API calls straight from the browser because it’s the fastest way to make a demo work. That puts your secret key in front of every visitor. Here’s how to check in five minutes and fix it properly.</p><a class="text-link" href="./#contact" data-plan="Launch Check">Get your app checked by hand <span aria-hidden="true">↗</span></a></header>
+<div class="page-body"><p class="article-byline">By Joshua Bluestine · Published November 1, 2026</p>
+
+<section><h2>How keys end up in the browser</h2>
+<p>Anything your frontend code can use, your visitors can read. Putting a key in a <code>.env</code> file doesn’t hide it if your build tool copies it into the code it sends to the browser, and the common frameworks do exactly that for certain variable names:</p>
+<ul>
+<li><strong>Vite</strong> (used by Lovable, Bolt and many React apps) exposes any variable starting with <code>VITE_</code> to client code.</li>
+<li><strong>Next.js</strong> inlines any variable starting with <code>NEXT_PUBLIC_</code> into the browser bundle.</li>
+</ul>
+<p>So <code>VITE_OPENAI_API_KEY</code> or <code>NEXT_PUBLIC_OPENAI_KEY</code> is a public key, whatever the file it lives in.</p>
+<p>Some keys are designed to be public: Stripe’s publishable key (<code>pk_…</code>) and Supabase’s publishable or <code>anon</code> key. Secret keys are not: OpenAI and Anthropic API keys, Stripe secret keys (<code>sk_live_…</code>), and Supabase secret or <code>service_role</code> keys. If one of those reaches a browser, someone can run up your AI bill, burn through your quota or, with a payment or database key, reach your customers’ data.</p>
+</section>
+
+<section><h2>How to check (five minutes)</h2>
+<ol class="step-list">
+<li><strong>Watch the network.</strong> Open your app, open dev tools (F12) and go to the <strong>Network</strong> tab. Use your AI feature. If you see requests going straight from the browser to <code>api.openai.com</code>, <code>api.anthropic.com</code> or a similar provider, your key is in the browser. Click the request and look at the <code>Authorization</code> or <code>x-api-key</code> header: that’s your key, readable by anyone.</li>
+<li><strong>Search the code your site ships.</strong> In dev tools, open <strong>Sources</strong> and press Ctrl+Shift+F (Cmd+Option+F on a Mac). Search for <code>sk-</code>, <code>sk_live</code>, <code>sb_secret</code> and <code>service_role</code>. Any match in your app’s own files needs fixing.</li>
+<li><strong>Check browser storage.</strong> Under <strong>Application → Local Storage</strong>, make sure no API keys are stored there. (Your <em>session</em> token being there is normal; a provider key is not.)</li>
+<li><strong>Check your repository.</strong> Make sure <code>.env</code> is listed in <code>.gitignore</code> and was never committed. If your repo is on GitHub, check the <strong>Security</strong> tab for secret-scanning alerts.</li>
+</ol>
+<p>For a worked example, the lab notes show <a href="llm-exploits.html#r5">API keys exposed in browser storage</a> and what an attacker can do with them.</p>
+</section>
+
+<section><h2>How to fix it properly</h2>
+<ol class="step-list">
+<li><strong>Move the call to a server.</strong> Your browser should call <em>your</em> backend, and your backend calls the AI provider. On Supabase that’s an Edge Function; on Next.js, a route handler; elsewhere, any serverless function. Store the key as a server-side secret with no <code>VITE_</code> or <code>NEXT_PUBLIC_</code> prefix.</li>
+<li><strong>Lock down the new endpoint.</strong> This step is what most fixes miss. If your new endpoint answers anyone, you’ve just built a free proxy for your API key. Require a signed-in user, limit how many requests each user can make, cap the input size, and fix the model and settings on the server rather than accepting them from the browser.</li>
+<li><strong>Rotate the key.</strong> Treat any key that was ever in the browser or a public repo as compromised, even if you fixed the code. Create a new key in the provider’s dashboard, put it on the server, then delete the old one.</li>
+<li><strong>Set spending limits.</strong> In your AI provider’s billing settings, set a monthly budget or usage limit and an email alert, so a leak becomes an alert rather than a surprise invoice.</li>
+</ol>
+</section>
+
+<section><h2>A fix prompt you can paste into your AI tool</h2>
+<p>Review the change before you ship it, then repeat the five-minute check above to confirm no key reaches the browser.</p>
+<pre><code>My app calls the OpenAI API directly from the browser, which exposes my
+API key. Fix this:
+1. Create a server-side function (Supabase Edge Function / Next.js route
+   handler) that makes the OpenAI call. Read the key from a server-side
+   secret with no VITE_ or NEXT_PUBLIC_ prefix.
+2. The function must reject requests without a valid signed-in user
+   session, limit each user to a reasonable number of requests per
+   minute, cap the prompt length, and set the model on the server.
+3. Change the frontend to call this function instead of OpenAI.
+4. Remove every API key from frontend code and client-side env vars.
+Then list every place a secret key appeared so I can rotate it.</code></pre>
+</section>
+
+<section><h2>The short version</h2>
+<ul>
+<li>No browser requests go directly to an AI or payment provider with a secret key.</li>
+<li>No <code>sk-</code>, <code>sk_live</code>, <code>sb_secret</code> or <code>service_role</code> in your shipped code.</li>
+<li>Secret keys live only in server-side env vars, with no public prefix.</li>
+<li>The server endpoint requires login, rate limits users and fixes the model.</li>
+<li>Any key that was ever exposed has been rotated.</li>
+<li>A spending limit and alert are set with your AI provider.</li>
+</ul>
+<p>The <a href="./#plans">Launch Check</a> covers exposed keys alongside your database rules, unprotected routes and AI features, with fixes you can paste into your coding tool.</p>
+</section>
+</div><section class="page-cta"><p class="eyebrow">Want a second pair of eyes?</p><h2>Get your app checked before launch.</h2><p>The Launch Check covers your database rules, exposed keys, unprotected routes and AI features by hand, with plain-English findings, fixes you can paste into your AI coding tool, and a recheck. $400, fixed price.</p><div class="actions"><a class="button" href="./#contact" data-plan="Launch Check">Get a launch check <span aria-hidden="true">↗</span></a><a class="text-link" href="guides.html">More guides →</a></div></section>
+</div></main><footer class="site-footer"><div class="shell footer-top"><a class="brand" href="./#top"><img src="logo.png" alt="" width="34" height="34"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a><p>Security checks for AI-built apps.<br>Plain English. Fixes you can paste.</p><nav class="footer-links" aria-label="Services and resources">
+<a href="ai-agent-security-testing.html">AI &amp; LLM security checks</a><a href="saas-security-review.html">Data &amp; API security checks</a><a href="guides.html">Security guides</a><a href="xoscar-control-plane-research.html">Xoscar research</a><a href="llm-exploits.html">LLM testing notes</a><a href="case-studies.html">Lab case studies</a><a href="sample-report.html">Sample report</a><a href="./#faq">Questions</a><a href="./#contact">Contact</a></nav></div><div class="shell footer-bottom"><span>© <span id="year">2026</span> Blue Jay Software</span><span>All testing requires written scope and authorization.</span><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button></div></footer></body></html>
