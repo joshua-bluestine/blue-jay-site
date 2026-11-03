@@ -12,7 +12,7 @@ PAGES = ["index.html", "ai-agent-security-testing.html", "saas-security-review.h
          "xoscar-control-plane-research.html", "llm-exploits.html", "case-studies.html",
          "sample-report.html", "guides.html", "supabase-rls-check.html", "exposed-api-keys.html", "ai-app-security-checklist.html",
          "firebase-security-rules-check.html", "leaked-api-key-what-to-do.html"]
-BOOKING = "https://calendly.com/jbluestine-bluejayappsec/intro-call"
+CONTACT_EMAIL = "mailto:jbluestine@bluejayappsec.com"
 
 
 class Page(HTMLParser):
@@ -79,7 +79,8 @@ def main():
         check(len(p.h1) == 1, f"{name}: expected exactly one H1")
         check(len(p.ids) == len(set(p.ids)), f"{name}: duplicate IDs")
         check(bool(p.jsonld), f"{name}: missing structured data")
-        check(BOOKING in p.links, f"{name}: no direct appointment link")
+        check(any(h.endswith("#contact") or h.startswith(CONTACT_EMAIL) for h in p.links), f"{name}: no contact link")
+        check(not any("calendly.com" in h for h in p.links), f"{name}: stale Calendly link")
         titles.add(p.title)
         descriptions.add(description)
         for href in p.links + p.assets:

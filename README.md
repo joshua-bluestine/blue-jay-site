@@ -4,7 +4,7 @@ Static website for https://bluejayappsec.com, published by GitHub Pages from `ma
 
 ## Structure
 
-- `index.html`: positioning, credentials, coverage, approach, deliverables, pricing, buyer FAQs, appointment links and the inquiry form.
+- `index.html`: positioning, credentials, coverage, approach, deliverables, pricing, buyer FAQs, email links (jbluestine@bluejayappsec.com) and the inquiry form. There is no booking tool; calls are arranged by email.
 - `assets/site.css`: responsive design and motion preferences.
 - `assets/content.css`: buyer FAQs, deliverables and supporting-page layouts.
 - `assets/site.js`: mobile navigation, scroll progress, reveals, process steps, and research deep links.
@@ -22,7 +22,7 @@ No build step or external JavaScript dependencies. Preview with `python -m http.
 
 ## Verification and search measurement
 
-Run `python scripts/check_site.py` to check metadata, schema JSON, sitemap coverage, local links and anchors, assets, and the complete homepage buyer path. Run `node --check assets/site.js` and `node --check assets/contact.js` for JavaScript syntax. Inspect the homepage and evidence pages at desktop and mobile widths, including menu, FAQ, deep links and plan selection. Do not submit the contact form or create a Calendly appointment during checks.
+Run `python scripts/check_site.py` to check metadata, schema JSON, sitemap coverage, local links and anchors, assets, and the complete homepage buyer path. Run `node --check assets/site.js` and `node --check assets/contact.js` for JavaScript syntax. Inspect the homepage and evidence pages at desktop and mobile widths, including menu, FAQ, deep links and plan selection. Do not submit the contact form during checks.
 
 After publication, submit `https://bluejayappsec.com/sitemap.xml` in the domain's Google Search Console property and inspect the homepage and restored URLs. Search Console ownership and property access are separate from this repository; absence of a verification meta tag does not mean the property is unverified. Measure impressions, queries, clicks and indexed pages there. Rankings, backlinks and Core Web Vitals are not established by the local checker. No analytics script or third-party tracking was introduced by these changes.
 
