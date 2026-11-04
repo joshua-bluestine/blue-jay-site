@@ -11,7 +11,8 @@ ORIGIN = "https://bluejayappsec.com"
 PAGES = ["index.html", "ai-agent-security-testing.html", "saas-security-review.html",
          "xoscar-control-plane-research.html", "llm-exploits.html", "case-studies.html",
          "sample-report.html", "guides.html", "supabase-rls-check.html", "exposed-api-keys.html", "ai-app-security-checklist.html",
-         "firebase-security-rules-check.html", "leaked-api-key-what-to-do.html"]
+         "firebase-security-rules-check.html", "leaked-api-key-what-to-do.html",
+         "supabase-rls-checker.html"]
 CONTACT_EMAIL = "mailto:jbluestine@bluejayappsec.com"
 
 

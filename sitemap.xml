@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://bluejayappsec.com/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://bluejayappsec.com/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://bluejayappsec.com/ai-agent-security-testing.html</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://bluejayappsec.com/saas-security-review.html</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://bluejayappsec.com/xoscar-control-plane-research.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://bluejayappsec.com/llm-exploits.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://bluejayappsec.com/case-studies.html</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://bluejayappsec.com/sample-report.html</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://bluejayappsec.com/guides.html</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://bluejayappsec.com/supabase-rls-check.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://bluejayappsec.com/guides.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://bluejayappsec.com/supabase-rls-check.html</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://bluejayappsec.com/exposed-api-keys.html</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://bluejayappsec.com/ai-app-security-checklist.html</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://bluejayappsec.com/firebase-security-rules-check.html</loc><lastmod>2026-11-01</lastmod></url>
   <url><loc>https://bluejayappsec.com/leaked-api-key-what-to-do.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://bluejayappsec.com/supabase-rls-checker.html</loc><lastmod>2026-11-04</lastmod></url>
 </urlset>
