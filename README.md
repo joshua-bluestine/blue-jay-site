@@ -14,6 +14,7 @@ Static website for https://bluejayappsec.com, published by GitHub Pages from `ma
 - `llm-exploits.html`: existing self-hosted LLM lab evidence; `#r1` through `#r5` remain available.
 - `case-studies.html`: existing application lab reproductions; `#cs1` through `#cs3` remain available.
 - `sample-report.html`: explicitly fictional report, evidence and retest examples.
+- `supabase-rls-checker.html` + `assets/rls-checker.js` and `firebase-rules-checker.html` + `assets/firebase-rules-checker.js`: free in-browser rules checkers (shared styles in `assets/tools.css`). Nothing pasted leaves the page.
 - The homepage retains useful `#r1`–`#r5` summary anchors. Legacy `#sample` and `#questions` resolve to deliverables and FAQs. Old service/research URLs serve substantive pages with self canonicals, without noindex redirect stubs.
 - The retired self-check and other missing URLs use `404.html`; no unrelated homepage redirect is imposed.
 - `sitemap.xml` includes all seven canonical content pages. Update dates when their content changes.
@@ -22,7 +23,7 @@ No build step or external JavaScript dependencies. Preview with `python -m http.
 
 ## Verification and search measurement
 
-Run `python scripts/check_site.py` to check metadata, schema JSON, sitemap coverage, local links and anchors, assets, and the complete homepage buyer path. Run `node --check assets/site.js` and `node --check assets/contact.js` for JavaScript syntax. Inspect the homepage and evidence pages at desktop and mobile widths, including menu, FAQ, deep links and plan selection. Do not submit the contact form during checks.
+Run `python scripts/check_site.py` to check metadata, schema JSON, sitemap coverage, local links and anchors, assets, and the complete homepage buyer path. Run `node --check` on `assets/site.js`, `assets/contact.js`, `assets/rls-checker.js` and `assets/firebase-rules-checker.js` for JavaScript syntax. Inspect the homepage and evidence pages at desktop and mobile widths, including menu, FAQ, deep links and plan selection. Do not submit the contact form during checks.
 
 After publication, submit `https://bluejayappsec.com/sitemap.xml` in the domain's Google Search Console property and inspect the homepage and restored URLs. Search Console ownership and property access are separate from this repository; absence of a verification meta tag does not mean the property is unverified. Measure impressions, queries, clicks and indexed pages there. Rankings, backlinks and Core Web Vitals are not established by the local checker. No analytics script or third-party tracking was introduced by these changes.
 

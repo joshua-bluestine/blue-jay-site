@@ -7,7 +7,7 @@
 <meta property="og:title" content="How to Check Your Firebase Security Rules | Blue Jay"><meta property="og:description" content="A founder’s guide to Firebase Security Rules: find open Firestore, Realtime Database and Storage rules, test them safely, and lock data to each user."><meta property="og:url" content="https://bluejayappsec.com/firebase-security-rules-check.html"><meta property="og:image" content="https://bluejayappsec.com/social-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Blue Jay AppSec: security checks for AI-built apps"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Check Your Firebase Security Rules | Blue Jay"><meta name="twitter:description" content="A founder’s guide to Firebase Security Rules: find open Firestore, Realtime Database and Storage rules, test them safely, and lock data to each user."><meta name="twitter:image" content="https://bluejayappsec.com/social-card.png">
 <link rel="stylesheet" href="assets/site.css?v=16f2727989"><link rel="stylesheet" href="assets/content.css?v=fbe03bf4f8"><script src="assets/site.js?v=d832b6dbbf" defer></script>
 <noscript><style>.motion-toggle,.menu-toggle{display:none}@media(max-width:680px){.header-inner{flex-wrap:wrap;padding-top:14px}.site-header nav{display:flex;position:static;flex-direction:row;flex-wrap:wrap;padding:0 0 12px;gap:12px;background:none;border:0}.site-header nav a{font-size:.7rem!important}.site-header nav>.button{margin:0}}</style></noscript>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://bluejayappsec.com/#business", "name": "Blue Jay Application Security", "url": "https://bluejayappsec.com/", "logo": "https://bluejayappsec.com/logo.png", "description": "Manual security checks for apps built with AI coding tools and apps with LLM features: exposed keys, database access rules, API authorization and prompt injection. Plain-English findings, copy-paste fixes and a recheck.", "email": "jbluestine@bluejayappsec.com", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@id": "https://bluejayappsec.com/#joshua"}}, {"@type": "Person", "@id": "https://bluejayappsec.com/#joshua", "name": "Joshua Bluestine", "jobTitle": "Founder, Blue Jay Application Security", "sameAs": ["https://github.com/joshua-bluestine"], "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": "CompTIA Security+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA Network+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA A+"}], "url": "https://bluejayappsec.com/#joshua"}, {"@type": "TechArticle", "@id": "https://bluejayappsec.com/firebase-security-rules-check.html#article", "url": "https://bluejayappsec.com/firebase-security-rules-check.html", "headline": "How to check your Firebase security rules before launch", "name": "How to Check Your Firebase Security Rules | Blue Jay", "description": "A founder’s guide to Firebase Security Rules: find open Firestore, Realtime Database and Storage rules, test them safely, and lock data to each user.", "inLanguage": "en", "datePublished": "2026-11-01", "dateModified": "2026-11-01", "image": "https://bluejayappsec.com/social-card.png", "author": {"@id": "https://bluejayappsec.com/#joshua"}, "publisher": {"@id": "https://bluejayappsec.com/#business"}, "mainEntityOfPage": "https://bluejayappsec.com/firebase-security-rules-check.html", "isPartOf": {"@id": "https://bluejayappsec.com/guides.html#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bluejayappsec.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://bluejayappsec.com/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Firebase rules check", "item": "https://bluejayappsec.com/firebase-security-rules-check.html"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://bluejayappsec.com/#business", "name": "Blue Jay Application Security", "url": "https://bluejayappsec.com/", "logo": "https://bluejayappsec.com/logo.png", "description": "Manual security checks for apps built with AI coding tools and apps with LLM features: exposed keys, database access rules, API authorization and prompt injection. Plain-English findings, copy-paste fixes and a recheck.", "email": "jbluestine@bluejayappsec.com", "areaServed": {"@type": "Country", "name": "United States"}, "founder": {"@id": "https://bluejayappsec.com/#joshua"}}, {"@type": "Person", "@id": "https://bluejayappsec.com/#joshua", "name": "Joshua Bluestine", "jobTitle": "Founder, Blue Jay Application Security", "sameAs": ["https://github.com/joshua-bluestine"], "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": "CompTIA Security+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA Network+"}, {"@type": "EducationalOccupationalCredential", "name": "CompTIA A+"}], "url": "https://bluejayappsec.com/#joshua"}, {"@type": "TechArticle", "@id": "https://bluejayappsec.com/firebase-security-rules-check.html#article", "url": "https://bluejayappsec.com/firebase-security-rules-check.html", "headline": "How to check your Firebase security rules before launch", "name": "How to Check Your Firebase Security Rules | Blue Jay", "description": "A founder’s guide to Firebase Security Rules: find open Firestore, Realtime Database and Storage rules, test them safely, and lock data to each user.", "inLanguage": "en", "datePublished": "2026-11-01", "dateModified": "2026-11-09", "image": "https://bluejayappsec.com/social-card.png", "author": {"@id": "https://bluejayappsec.com/#joshua"}, "publisher": {"@id": "https://bluejayappsec.com/#business"}, "mainEntityOfPage": "https://bluejayappsec.com/firebase-security-rules-check.html", "isPartOf": {"@id": "https://bluejayappsec.com/guides.html#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://bluejayappsec.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://bluejayappsec.com/guides.html"}, {"@type": "ListItem", "position": 3, "name": "Firebase rules check", "item": "https://bluejayappsec.com/firebase-security-rules-check.html"}]}]}</script>
 </head><body class="detail-page"><a class="skip-link" href="#main">Skip to content</a><div class="scroll-progress" aria-hidden="true"></div>
 <header class="site-header"><div class="shell header-inner">
   <a href="./#top" class="brand" aria-label="Blue Jay Application Security, home"><img src="logo.png" alt="" width="38" height="38"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a>
@@ -19,13 +19,13 @@
 <header class="page-hero"><p class="eyebrow">Guides / Firebase rules check</p><h1>How to check your Firebase security rules before launch</h1><p class="page-lead">If your app runs on Firebase, your API key is public by design. Security Rules are what actually decide who can read and change your data. Here’s how to find the rules that leave it open, and how to fix them.</p><a class="text-link" href="./#contact" data-plan="Launch Check">Get your app checked by hand <span aria-hidden="true">↗</span></a></header>
 <div class="page-body"><p class="article-byline">By Joshua Bluestine · Published November 1, 2026</p>
 
-<section><h2>Your Firebase API key isn’t the problem. Your rules are.</h2>
+<section id="api-key"><h2>Your Firebase API key isn’t the problem. Your rules are.</h2>
 <p>Founders often panic when they spot their Firebase <code>apiKey</code> in their frontend code. Firebase’s own documentation says these keys are <strong>public by design</strong>: they identify your project, they don’t grant access. Your data in Cloud Firestore, Realtime Database and Cloud Storage is protected by <strong>Firebase Security Rules</strong>.</p>
 <p>That means if your rules are open, anyone who knows your project ID can read, change or delete your data, without ever logging in. And AI tools, tutorials and Firebase’s own “test mode” all make it easy to ship open rules by accident.</p>
 <p>(A few keys are different. Firebase service account keys, used by the Admin SDK, and AI keys like a Gemini Developer API key <strong>must</strong> stay secret. If one of those reached your frontend or a public repo, see <a href="leaked-api-key-what-to-do.html">what to do when a secret key leaks</a>.)</p>
 </section>
 
-<section><h2>Step 1: Find your rules</h2>
+<section id="step-1"><h2>Step 1: Find your rules</h2>
 <p>In the Firebase console, open each product you use and go to its <strong>Rules</strong> tab:</p>
 <ul>
 <li><strong>Firestore Database → Rules</strong></li>
@@ -35,8 +35,9 @@
 <p>If your project has a <code>firestore.rules</code>, <code>database.rules.json</code> or <code>storage.rules</code> file, that’s what gets deployed. Check that the file and the console match.</p>
 </section>
 
-<section><h2>Step 2: Spot the rules that leave data open</h2>
+<section id="step-2"><h2>Step 2: Spot the rules that leave data open</h2>
 <p>These are the patterns to look for. Any of them on data that belongs to users is a problem.</p>
+<aside class="context-note"><strong>Want this done for you?</strong> Paste your rules into the free <a href="firebase-rules-checker.html">Firebase security rules checker</a>. It flags every pattern below, plus Storage and Realtime Database mistakes, right in your browser.</aside>
 <h3>Open to everyone</h3>
 <pre><code>// Firestore or Storage
 allow read, write: if true;
@@ -55,7 +56,7 @@ allow read, write: if true;
 <p>If you grant access by email domain, also require <code>request.auth.token.email_verified == true</code>. Otherwise someone can sign up with an address they don’t own.</p>
 </section>
 
-<section><h2>Step 3: Lock data to its owner</h2>
+<section id="step-3"><h2>Step 3: Lock data to its owner</h2>
 <p>For data where each document belongs to one user, rules like these limit access to the owner. Replace <code>notes</code> and <code>ownerId</code> with your collection and field:</p>
 <pre><code>rules_version = '2';
 service cloud.firestore {
@@ -98,16 +99,16 @@ service firebase.storage {
 <p>Two more things worth checking: a user should never be able to make themselves an admin by editing a <code>role</code> or <code>isAdmin</code> field on their own profile, and anything that isn’t meant for clients at all can be closed with <code>allow read, write: if false;</code> and handled on your server.</p>
 </section>
 
-<section><h2>Step 4: Test your rules safely</h2>
+<section id="step-4"><h2>Step 4: Test your rules safely</h2>
 <ol class="step-list">
-<li><strong>Use the Rules Playground.</strong> In the console’s Rules tab, open the <strong>Rules Playground</strong>. Simulate a read of another user’s document, first as an unauthenticated user, then as an authenticated user with a different UID. Both should be <strong>denied</strong>. Then simulate the owner reading their own document, which should be <strong>allowed</strong>.</li>
+<li><strong>Run the checker, then the Rules Playground.</strong> Paste your rules into the <a href="firebase-rules-checker.html">rules checker</a> to find likely problems. Then, in the console’s Rules tab, open the <strong>Rules Playground</strong> to confirm. Simulate a read of another user’s document, first as an unauthenticated user, then as an authenticated user with a different UID. Both should be <strong>denied</strong>. Then simulate the owner reading their own document, which should be <strong>allowed</strong>.</li>
 <li><strong>Test in your app with two accounts.</strong> Sign in as User A and try to open User B’s data, for example by changing a document ID in the URL. You should get nothing.</li>
 <li><strong>Add tests before you change rules again.</strong> Firebase recommends unit testing rules with the Local Emulator Suite. Your AI tool can write these tests for you (see the prompt below).</li>
 </ol>
 <aside class="context-note"><strong>Only test what you own.</strong> These checks are for your own Firebase project and test accounts. Probing someone else’s database without written permission is unauthorized access.</aside>
 </section>
 
-<section><h2>Step 5: Turn on the extra protections</h2>
+<section id="step-5"><h2>Step 5: Turn on the extra protections</h2>
 <ul>
 <li><strong>App Check.</strong> Firebase recommends enabling App Check for every service that supports it. It helps make sure requests come from your real app, not a script. It’s a second layer, not a replacement for good rules.</li>
 <li><strong>Budget alerts.</strong> Set a budget alert in your project’s billing settings, so abuse shows up as an email rather than a surprise bill.</li>
@@ -115,7 +116,7 @@ service firebase.storage {
 </ul>
 </section>
 
-<section><h2>A fix prompt you can paste into your AI tool</h2>
+<section id="fix-prompt"><h2>A fix prompt you can paste into your AI tool</h2>
 <p>Review the rules it proposes before deploying them, then re-run the Rules Playground checks in Step 4.</p>
 <pre><code>Review my Firebase Security Rules for Firestore, Realtime Database and
 Storage. Then:
@@ -132,7 +133,7 @@ Storage. Then:
 Show me the rules and tests before deploying.</code></pre>
 </section>
 
-<section><h2>The short version</h2>
+<section id="short-version"><h2>The short version</h2>
 <ul>
 <li>No <code>if true</code> or test-mode timestamp rules on user data.</li>
 <li>No rules where any signed-in user can read everything.</li>
@@ -145,4 +146,4 @@ Show me the rules and tests before deploying.</code></pre>
 </section>
 </div><section class="page-cta"><p class="eyebrow">Want a second pair of eyes?</p><h2>Get your app checked before launch.</h2><p>The Launch Check covers your database rules, exposed keys, unprotected routes and AI features by hand, with plain-English findings, fixes you can paste into your AI coding tool, and a recheck. $400, fixed price.</p><div class="actions"><a class="button" href="./#contact" data-plan="Launch Check">Get a launch check <span aria-hidden="true">↗</span></a><a class="text-link" href="guides.html">More guides →</a></div></section>
 </div></main><footer class="site-footer"><div class="shell footer-top"><a class="brand" href="./#top"><img src="logo.png" alt="" width="34" height="34"><span>BLUE JAY<small>APPLICATION SECURITY</small></span></a><p>Security checks for AI-built apps.<br>Plain English. Fixes you can paste.</p><nav class="footer-links" aria-label="Services and resources">
-<a href="ai-agent-security-testing.html">AI &amp; LLM security checks</a><a href="saas-security-review.html">Data &amp; API security checks</a><a href="guides.html">Security guides</a><a href="supabase-rls-checker.html">RLS checker</a><a href="xoscar-control-plane-research.html">Xoscar research</a><a href="llm-exploits.html">LLM testing notes</a><a href="case-studies.html">Lab case studies</a><a href="sample-report.html">Sample report</a><a href="./#faq">Questions</a><a href="./#contact">Contact</a></nav></div><div class="shell footer-bottom"><span>© <span id="year">2026</span> Blue Jay Software</span><span>All testing requires written scope and authorization.</span><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button></div></footer></body></html>
+<a href="ai-agent-security-testing.html">AI &amp; LLM security checks</a><a href="saas-security-review.html">Data &amp; API security checks</a><a href="guides.html">Security guides</a><a href="supabase-rls-checker.html">RLS checker</a><a href="firebase-rules-checker.html">Firebase rules checker</a><a href="xoscar-control-plane-research.html">Xoscar research</a><a href="llm-exploits.html">LLM testing notes</a><a href="case-studies.html">Lab case studies</a><a href="sample-report.html">Sample report</a><a href="./#faq">Questions</a><a href="./#contact">Contact</a></nav></div><div class="shell footer-bottom"><span>© <span id="year">2026</span> Blue Jay Software</span><span>All testing requires written scope and authorization.</span><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button></div></footer></body></html>

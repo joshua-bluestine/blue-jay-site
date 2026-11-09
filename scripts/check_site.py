@@ -12,7 +12,7 @@ PAGES = ["index.html", "ai-agent-security-testing.html", "saas-security-review.h
          "xoscar-control-plane-research.html", "llm-exploits.html", "case-studies.html",
          "sample-report.html", "guides.html", "supabase-rls-check.html", "exposed-api-keys.html", "ai-app-security-checklist.html",
          "firebase-security-rules-check.html", "leaked-api-key-what-to-do.html",
-         "supabase-rls-checker.html"]
+         "supabase-rls-checker.html", "firebase-rules-checker.html"]
 CONTACT_EMAIL = "mailto:jbluestine@bluejayappsec.com"
 
 
