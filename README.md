@@ -4,7 +4,10 @@ Static website for https://bluejayappsec.com, published by GitHub Pages from `ma
 
 ## Structure
 
-- `index.html`: positioning, credentials, coverage, approach, deliverables, pricing, buyer FAQs, email links (jbluestine@bluejayappsec.com) and the inquiry form. There is no booking tool; calls are arranged by email.
+- `index.html`: positioning, credentials, coverage, approach, deliverables, pricing, buyer FAQs, email links (jbluestine@bluejayappsec.com) and the inquiry form. Calls are booked through Cal.com (`https://cal.com/joshua-bluestine-1cyign/30min`, free plan, no expiry); every "Book a 30-minute call" link points there.
+- `methodology.html`: rules of engagement, the four review steps, test areas mapped to OWASP (Top 10, API Top 10, LLM Top 10, ASVS) and the severity scale used in reports.
+- `privacy.html`: what the site collects (no analytics or cookies), how inquiries are handled, and how test accounts, evidence and reports are stored, shared and deleted. Its promises (90-day evidence deletion, encrypted devices, same-day notice of critical issues) are commitments: change the page before changing the practice.
+- The founder card's monogram accepts a photo: replace `JB<span>↗</span>` inside `.monogram` with `<img src="founder.jpg" alt="Joshua Bluestine" width="72" height="72">`.
 - `assets/site.css`: responsive design and motion preferences.
 - `assets/content.css`: buyer FAQs, deliverables and supporting-page layouts.
 - `assets/site.js`: mobile navigation, scroll progress, reveals, process steps, and research deep links.
@@ -17,7 +20,7 @@ Static website for https://bluejayappsec.com, published by GitHub Pages from `ma
 - `supabase-rls-checker.html` + `assets/rls-checker.js` and `firebase-rules-checker.html` + `assets/firebase-rules-checker.js`: free in-browser rules checkers (shared styles in `assets/tools.css`). Nothing pasted leaves the page.
 - The homepage retains useful `#r1`–`#r5` summary anchors. Legacy `#sample` and `#questions` resolve to deliverables and FAQs. Old service/research URLs serve substantive pages with self canonicals, without noindex redirect stubs.
 - The retired self-check and other missing URLs use `404.html`; no unrelated homepage redirect is imposed.
-- `sitemap.xml` includes all seven canonical content pages. Update dates when their content changes.
+- `sitemap.xml` includes every canonical content page listed in `scripts/check_site.py`. Update dates when their content changes.
 
 No build step or external JavaScript dependencies. Preview with `python -m http.server --bind 127.0.0.1`. Publish by committing reviewed changes and pushing to `main`.
 
