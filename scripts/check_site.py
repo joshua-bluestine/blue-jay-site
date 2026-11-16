@@ -107,8 +107,10 @@ def main():
     if homepage:
         for anchor in ("coverage", "research", "approach", "deliverables", "plans", "faq", "contact"):
             check(anchor in homepage.ids, f"Homepage buyer flow missing #{anchor}")
-        for price in ("$400", "$1,200", "$800", "$300"):
+        for price in ("$1,200", "$800", "$300"):
             check(price in homepage.text, f"Homepage missing current price {price}")
+    for name, p in pages.items():
+        check("Launch Check" not in p.text and "$400" not in p.text, f"{name}: mentions the retired $400 Launch Check")
         for name in PAGES[1:]:
             check(any(urlsplit(h).path.lstrip("/") == name for h in homepage.links),
                   f"Homepage has no crawlable link to {name}")
